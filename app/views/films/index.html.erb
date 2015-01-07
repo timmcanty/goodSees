@@ -13,7 +13,7 @@
   <li>
     <%= link_to film.title, film_url(film.id) %>
     <% if !current_user.films.include?(film) %>
-      <%= link_to 'RATE THIS FILM!', new_film_rating(film.id) %>
+      <%= link_to 'RATE THIS FILM!', new_film_rating_url(film.id) %>
     <% end %>
   </li>
 <% end %>

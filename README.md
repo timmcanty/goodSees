@@ -11,6 +11,8 @@ Implemented:
 - Users have 'to watch' and 'watched' reels
 - Users can assign a film to multiple reels
 - Users can see a list/display of all films
+- Users can create and edit a profile
+- Users can view each others ratings and profiles
 
 MVP Features:
 - Users can search for other Users
@@ -21,9 +23,9 @@ MVP Features:
 - Users can search the site for films
 
 - Users can see the overall ratings for a film.
-- Users can create and edit a profile
+
 - Users can feature a single reel on their profile
-- Users can view each others ratings and profiles
+
 
 Schema:
 

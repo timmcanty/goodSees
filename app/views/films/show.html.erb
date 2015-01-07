@@ -17,3 +17,15 @@
 <% else %>
   <%= link_to "New Rating", new_film_rating_url(@film.id) %>
 <% end %>
+
+
+<% @film.ratings.includes(:user).each do |rating| %>
+  <% next if rating == @rating %>
+  <content>
+    <h3><%= rating.user.username %>: <%= rating.rating %></h3>
+
+    <p>
+      <%= rating.review %>
+    </p>
+  <content>
+<% end %>

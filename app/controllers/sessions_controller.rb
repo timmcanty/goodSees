@@ -7,13 +7,13 @@ class SessionsController < ApplicationController
       render :new
     else
       login_user!(user)
-      render :works
+      redirect_to reels_url
     end
   end
 
   def destroy
     logout_user!
-    render :works
+    redirect_to new_session_url
   end
 
   def new

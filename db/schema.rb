@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150107152540) do
+ActiveRecord::Schema.define(version: 20150107162004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "reels", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name",       null: false
+    t.boolean  "custom"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reels", ["user_id", "name"], name: "index_reels_on_user_id_and_name", unique: true, using: :btree
 
   create_table "session_tokens", force: true do |t|
     t.integer  "user_id"

@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  
+
 <% if current_user.nil? %>
   <%= link_to "Sign in", new_session_url %> or
   <%= link_to "Sign up", new_user_url %>
@@ -15,6 +15,13 @@
   <%= current_user.username %>
   <%= button_to "Logout", session_url, method: :delete %>
 <% end %>
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <%= error %>
+  <% end %>
+<% end %>
+
 <%= yield %>
 
 </body>

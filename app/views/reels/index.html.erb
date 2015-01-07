@@ -1,0 +1,20 @@
+
+
+
+<ul class="reels-list">
+  <% @reels.each do |reel| %>
+    <li><%= reel.name %>
+      <% if reel.custom %>
+        <%=button_to "Delete Reel", reel_url(reel.id), method: :delete %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<h4>Create a New Reel</h4>
+<form id="form_id" action="<%= reels_url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label for="">Reel Name</label><br>
+  <input type="text" name="name" value="">
+  <input type="submit" name="submit" value="Submit">
+</form>

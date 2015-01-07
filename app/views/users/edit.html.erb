@@ -1,0 +1,27 @@
+
+<h3>EDIT PROFILE</h3>
+
+<form action="<%= user_url(@user.id) %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="PATCH">
+
+  <h3>Edit Profile</h3><br>
+
+  <label> Name
+    <input type="text" name="user[name]" value="<%= @user.name %>"><br>
+  </label>
+
+  <label> Location
+    <input type="text" name="user[location]" value="<%= @user.location %>"><br>
+  </label>
+
+  <label> Birth Date
+    <input type="date" name="user[birth_date]" value="<%= @user.birth_date %>">
+  </label>
+
+  <label> Bio
+    <textarea name="user[bio]" rows="20" cols="80"><%= @user.bio %></textarea>
+  </label>
+
+  <input type="submit" value="Submit">
+</form>

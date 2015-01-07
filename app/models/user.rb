@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   has_many :session_tokens
   has_many :reels
+  has_many :ratings
+  has_many :films, through: :ratings
 
   validates :username, :email,  presence: true, uniqueness: true
   validates :password_digest, presence: true

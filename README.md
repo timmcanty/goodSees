@@ -57,7 +57,7 @@ Shelves
 
 Ratings:
 :user_id
-:book_id
+:film_id
 :rating
 :view_date
 :review

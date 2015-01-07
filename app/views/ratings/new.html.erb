@@ -1,0 +1,23 @@
+<form action="<%= film_ratings_url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label for="">Rating
+    <ul>
+      <li><input type="radio" name="rating[rating]" value="1">1</li>
+      <li><input type="radio" name="rating[rating]" value="2">2</li>
+      <li><input type="radio" name="rating[rating]" value="3">3</li>
+      <li><input type="radio" name="rating[rating]" value="4">4</li>
+      <li><input type="radio" name="rating[rating]" value="5">5</li>
+    </ul>
+  </label><br>
+
+  <label for="">View Date
+    <input type="date" name="rating[view_date]" value="">
+  </label>
+
+  <label for="">Review
+    <textarea name="rating[review]" rows="8" cols="40"></textarea>
+  </label>
+
+  <input type="submit" value="Submit">
+</form>

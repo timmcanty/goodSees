@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+Film.create(title: 'Guardians of the Galaxy',
+  imdb_url: 'http://www.imdb.com/title/tt2015381/',
+  description: 'A group of intergalactic criminals are forced to work together to stop a fanatical warrior from taking control of the universe.')

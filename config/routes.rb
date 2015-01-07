@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'reels#index'
 
-  resources :users, only: [:create, :new] do
+  resources :users, only: [:create, :new, :show] do
     resources :films, only: [:index]
   end
   resource :session, only: [:create, :new, :destroy]

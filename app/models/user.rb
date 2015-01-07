@@ -1,14 +1,14 @@
 class User < ActiveRecord::Base
   attr_reader :password
 
+  validates :username, :email,  presence: true, uniqueness: true
+  validates :password_digest, presence: true
+  validates :password, length: { minimum: 6, allow_nil: true }
+
   has_many :session_tokens
   has_many :reels
   has_many :ratings
   has_many :films, through: :ratings
-
-  validates :username, :email,  presence: true, uniqueness: true
-  validates :password_digest, presence: true
-  validates :password, length: { minimum: 6, allow_nil: true }
 
   before_create :generate_default_reels
 
@@ -31,6 +31,17 @@ class User < ActiveRecord::Base
   def generate_default_reels
     reels.new( name: 'To Watch', custom: false)
     reels.new( name: 'Watched', custom: false)
+  end
+
+  def update_reels_for_film(wanted_reels, film_id)
+    unwanted_reels = self.reels.ids - wanted_reels
+
+    User.transaction do
+      FilmReel.where("film_id = ? AND reel_id in (?)", film_id, unwanted_reels).destroy_all
+      wanted_reels.each do |reel_id|
+        FilmReel.find_or_create_by( film_id: film_id, reel_id: reel_id )
+      end
+    end
   end
 
 end

@@ -20,5 +20,21 @@
   <label for="">Review
     <textarea name="rating[review]" rows="8" cols="40"><%= rating.review %></textarea>
   </label>
+  <br>
+
+  <label for=""> Reels
+    <ul>
+      <% current_user.reels.includes(:films).each do |reel| %>
+        <% next if reel.name == 'To Watch' %>
+        <li>
+        <% if reel.films.include?(rating.film) %>
+          <input type="checkbox" checked name="rating[reels][<%= reel.id %>]"><%= reel.name %>
+        <% else %>
+          <input type="checkbox" name="rating[reels][<%= reel.id %>]"><%= reel.name %>
+        <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </label>
 
   <input type="submit" value="Submit">

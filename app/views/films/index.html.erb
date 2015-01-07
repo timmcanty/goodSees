@@ -1,0 +1,20 @@
+<h3>FILMS INDEX</h3>
+
+
+<% if @user %>
+  <h4><%= @user.username %>'s films!</h4>
+<% else %>
+  <h4>All films!</h4>
+<% end %>
+
+
+<ul class="films-list">
+<% @films.each do |film| %>
+  <li>
+    <%= link_to film.title, film_url(film.id) %>
+    <% if !current_user.films.include?(film) %>
+      <%= link_to 'RATE THIS FILM!', new_film_rating(film.id) %>
+    <% end %>
+  </li>
+<% end %>
+</ul>

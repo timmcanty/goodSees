@@ -5,5 +5,6 @@ class Reel < ActiveRecord::Base
 
   belongs_to :user
   has_many :films, through: :film_reels
+  has_many :film_reels
 
 end

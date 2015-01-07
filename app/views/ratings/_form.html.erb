@@ -1,0 +1,24 @@
+
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label for="">Rating
+    <ul>
+        <% (1..5).each do |num| %>
+          <% if rating.rating == num %>
+            <li><input type="radio" name="rating[rating]" value="<%= num %>" checked ><%= num %></li>
+          <% else %>
+            <li><input type="radio" name="rating[rating]" value="<%= num %>"><%= num %></li>
+          <% end %>
+      <% end %>
+    </ul>
+  </label><br>
+
+  <label for="">View Date
+    <input type="date" name="rating[view_date]" value="<%= rating.view_date %>">
+  </label>
+
+  <label for="">Review
+    <textarea name="rating[review]" rows="8" cols="40"><%= rating.review %></textarea>
+  </label>
+
+  <input type="submit" value="Submit">

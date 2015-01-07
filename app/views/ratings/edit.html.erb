@@ -1,0 +1,7 @@
+
+<h1>EDIT</h1>
+
+<form action="<%= film_rating_url(@rating.film_id, @rating.id) %>" method="post">
+  <input type="hidden" name="_method" value="PATCH">
+<%= render "form", rating: @rating %>
+</form>

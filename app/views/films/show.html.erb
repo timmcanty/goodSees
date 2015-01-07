@@ -7,7 +7,7 @@
 </p>
 
 <% if current_user.films.include?(@film) %>
-  <h1>TODO: LINK TO EDIT RATING</h1>
+    <%= link_to "Edit Rating", edit_film_rating_url(@film.id, @rating.id) %>
    <h3>Rated as: <%= @rating.rating %></h3>
    <h3>Viewed on: <%= @rating.view_date %></h3>
 

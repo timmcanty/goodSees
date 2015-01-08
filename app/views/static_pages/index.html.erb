@@ -3,5 +3,7 @@
 </div>
 
 <script charset="utf-8">
-  GoodSees.currentUser = <%= current_user.id %>;
+  <% if current_user %>
+    GoodSees.currentUser = <%= current_user.id %>;
+  <% end %>
 </script>

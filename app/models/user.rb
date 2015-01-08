@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :ratings
   has_many :films, through: :ratings
 
-  before_create :generate_default_reels
+  before_create :build_default_reels
   after_create :set_featured_reel
 
   def self.find_by_credentials(username, password)
@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
     self.password_digest = BCrypt::Password.create(password)
   end
 
-  def generate_default_reels
+  def build_default_reels #change to build
     reels.new( name: 'To Watch', custom: false)
     reels.new( name: 'Watched', custom: false)
   end

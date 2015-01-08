@@ -1,7 +1,7 @@
 # goodSees
 GoodReads clone with movies instead!
 
-Implemented:
+Implemented MVP:
 - Users can sign up/ log in / sign out
 - Users can create custom reels
 - Users can rate films with a:
@@ -17,7 +17,7 @@ Implemented:
 - Admins can add,edit, and destroy films
 - Users can see the overall ratings for a film.
 
-MVP Features:
+Other Features:
 - Users can search for other Users
 - Users can send/accept friend requests
 - Users can put unwatched films in a 'to watch' reel (Backbone?)

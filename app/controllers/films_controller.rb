@@ -1,5 +1,6 @@
 class FilmsController < ApplicationController
 
+  before_action :require_admin, except: [:show, :index]
 
   def show
     @film = Film.find(params[:id])
@@ -19,61 +20,48 @@ class FilmsController < ApplicationController
   end
 
   def new
-    if current_user.is_admin?
       @film = Film.new
       render :new
-    else
-      redirect_to films_url
-    end
   end
 
   def create
-    if current_user.is_admin?
-      @film = Film.new(film_params)
-      if @film.save
-        redirect_to film_url(@film.id)
-      else
-        flash.now[:errors] = @film.errors.full_messages
-        render :new
-      end
+    @film = Film.new(film_params)
+    if @film.save
+      redirect_to film_url(@film.id)
     else
-      redirect_to films_Url
+      flash.now[:errors] = @film.errors.full_messages
+      render :new
     end
   end
 
   def edit
-    if current_user.is_admin?
-      fail
-      @film = Film.find(params[:id])
-      render :edit
-    else
-      redirect_to films_url
-    end
+    @film = Film.find(params[:id])
+    render :edit
   end
 
   def update
     @film = Film.find(params[:id])
-    if current_user.is_admin?
-      if @film.update(film_params)
-        redirect_to film_url(@film.id)
-      else
-        flash.now[:errors] = @film.errors.full_messages
-        render :edit
-      end
+    if @film.update(film_params)
+      redirect_to film_url(@film.id)
     else
-      redirect_to film_url(@film)
+      flash.now[:errors] = @film.errors.full_messages
+      render :edit
     end
   end
 
   def destroy
-    if current_user.is_admin?
-      @film = Film.find(params[:id])
-      @film.destroy
-    end
-      redirect_to films_url
+    @film = Film.find(params[:id])
+    @film.destroy
+    redirect_to films_url
   end
+
+  private
 
   def film_params
     params.require(:film).permit(:imdb_url, :title, :description)
+  end
+
+  def require_admin
+    redirect_to films_url unless current_user.is_admin?
   end
 end

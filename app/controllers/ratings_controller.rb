@@ -12,10 +12,12 @@ class RatingsController < ApplicationController
 
   def update
     @rating = Rating.find(params[:id])
-    if (params["rating"]["reels"] &&
-        params["rating"]["reels"].keys.map(&:to_i).sort != current_user.reels.ids)
-      current_user.update_reels_for_film(params["rating"]["reels"].keys.map(&:to_i), @rating.film.id)
+
+    if (params[:reels] &&
+        params[:reels].keys.map(&:to_i).sort != current_user.reels.ids)
+      current_user.update_reels_for_film(params[:reels].keys.map(&:to_i), @rating.film.id)
     end
+
     if @rating.update(rating_params)
       redirect_to film_url(@rating.film.id)
     else
@@ -25,13 +27,12 @@ class RatingsController < ApplicationController
   end
 
   def create
-    @rating = Rating.new(rating_params)
+    @rating = current_user.ratings.new(rating_params)
     @rating.film_id = params[:film_id]
-    @rating.user_id = current_user.id
-    if params["rating"]["reels"]
-      current_user.update_reels_for_film(params["rating"]["reels"].keys.map(&:to_i), @rating.film.id)
+    if params[:reels]
+      current_user.update_reels_for_film(params[:reels].keys.map(&:to_i), @rating.film.id)
     end
-    
+
     if @rating.save
       redirect_to film_url(@rating.film.id)
     else

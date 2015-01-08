@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'reels#index'
+  root to: 'static_pages#index'
 
   resources :users, only: [:create, :new, :show, :edit, :update, :index] do
     resources :films, only: [:index]

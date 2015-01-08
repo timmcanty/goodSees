@@ -8,6 +8,7 @@ window.GoodSees = {
 };
 
 $(document).ready(function(){
-  new GoodSees.Routers.Router({$rootEl : $('#main')});
+  console.log(GoodSees.current_user)
+  new GoodSees.Routers.Router({$rootEl : $('#main-content')});
   Backbone.history.start();
 });

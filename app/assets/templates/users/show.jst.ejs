@@ -1,20 +1,26 @@
 
-<section class="main section">
+<section class="main-section">
 
-  <section class="user-info">
-    <h1><%= user.escape('username') %>'s Films</h1>
-    <%= user.escape('reels') %>
-  </section>
 
-  <section class="user-reels">
-    <ul>
-      <% user.reels().forEach( function (reel) { %>
-        <li class="reel-display">
-          <a href="#" reel-id="<%= reel.id %>"><%= reel.escape('name') %></a>
-        </li>
-      <% }) %>
-    </ul>
-    <button name="button">Add Reel</button>
+  <section class="sidebar">
+
+
+    <section class="user-info">
+      <h1><%= user.escape('username') %>'s Films</h1>
+      <%= user.escape('reels') %>
+    </section>
+
+    <section class="user-reels">
+      <ul>
+        <% user.reels().forEach( function (reel) { %>
+          <li class="reel-display">
+            <a href="#" reel-id="<%= reel.id %>"><%= reel.escape('name') %></a>
+          </li>
+        <% }) %>
+      </ul>
+      <button name="button">Add Reel</button>
+    </section>
+
   </section>
 
   <section class="reel-films">

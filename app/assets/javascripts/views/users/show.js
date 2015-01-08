@@ -5,7 +5,8 @@ GoodSees.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   events: {
-    'click li.reel-display a' : 'changeReel'
+    'click li.reel-display a' : 'changeReel',
+    'click button.add-new-reel' : 'createReel'
   },
 
   template: JST['users/show'],
@@ -43,5 +44,28 @@ GoodSees.Views.UserShow = Backbone.CompositeView.extend({
       rating: this.model.ratings().findWhere({'film_id' : film.id})
     });
     this.addSubview('ul.films-list', filmView)
+  },
+
+  createReel: function () {
+    var view = this;
+    event.preventDefault();
+    var name = $('.new-reel-name').val();
+    console.log(name);
+    $('button.add-new-reel').prop('disabled', true);
+
+    this.model.reels().create({
+      name: name,
+      custom: true
+    },{wait : true,
+      success: function () {
+        $('button.add-new-reel').prop('disabled', false);
+        view.render();
+      },
+      error: function (err) {
+        alert('Invalid Reel Name');
+        $('button.add-new-reel').prop('disabled', false);
+      }
+    });
+
   }
 });

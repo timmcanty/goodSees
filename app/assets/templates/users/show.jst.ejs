@@ -11,6 +11,7 @@
     </section>
 
     <section class="user-reels">
+
       <ul>
         <% user.reels().forEach( function (reel) { %>
           <li class="reel-display">
@@ -18,7 +19,12 @@
           </li>
         <% }) %>
       </ul>
-      <button name="button">Add Reel</button>
+
+      <% if (user.id === GoodSees.currentUser) { %>
+        <input type="text" class="new-reel-name" value="">
+        <button class="add-new-reel" name="button">Add Reel</button>
+      <% } %>
+
     </section>
 
   </section>

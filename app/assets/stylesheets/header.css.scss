@@ -1,0 +1,31 @@
+header {
+  background: white;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 50px;
+  height: 100px;
+}
+
+nav.header-bar {
+  display: block;
+  font-size: 16px;
+}
+
+.nav-bar-left {
+  float: left;
+}
+
+.nav-bar-left > ul > li {
+  margin: 5px 20px;
+  display: block;
+  float: left;
+}
+
+.nav-bar-right {
+  float: right
+}
+.nav-bar-right > ul > li {
+  margin: 5px 20px;
+  display: block;
+  float: left;
+}

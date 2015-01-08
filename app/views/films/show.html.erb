@@ -1,5 +1,6 @@
 <h1><%= @film.title %></h1>
 
+<h4>Average Rating: <%= @film.average_rating %> from <%= @film.ratings.size %> users</h4>
 <a href="<%= @film.imdb_url %>">IMDB</a>
 
 <p>
@@ -16,6 +17,12 @@
    </p>
 <% else %>
   <%= link_to "New Rating", new_film_rating_url(@film.id) %>
+<% end %>
+
+<% if current_user.is_admin? %>
+<h5>ADMIN CONTROLS</h5><br>
+<a href="<%= edit_film_url(@film.id) %>">Edit This Film</a>
+<%= button_to "Delete This Film", film_url(@film.id), method: :delete %>
 <% end %>
 
 

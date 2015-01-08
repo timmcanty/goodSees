@@ -13,18 +13,18 @@ Implemented:
 - Users can see a list/display of all films
 - Users can create and edit a profile
 - Users can view each others ratings and profiles
+- Users can feature a single reel on their profile
+- Admins can add,edit, and destroy films
+- Users can see the overall ratings for a film.
 
 MVP Features:
 - Users can search for other Users
 - Users can send/accept friend requests
-- Admins can add new films to the DB
-
-- Users can put unwatched films in a 'to watch' reel
+- Users can put unwatched films in a 'to watch' reel (Backbone?)
 - Users can search the site for films
 
-- Users can see the overall ratings for a film.
 
-- Users can feature a single reel on their profile
+
 
 
 Schema:

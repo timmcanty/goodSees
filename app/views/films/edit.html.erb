@@ -1,0 +1,7 @@
+<h3>Edit a New Film</h3>
+
+
+<form  action="<%= film_url %>" method="post">
+  <input type="hidden" name="_method" value="PATCH">
+  <%= render "form", film: @film %>
+</form>

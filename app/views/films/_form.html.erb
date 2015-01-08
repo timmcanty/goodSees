@@ -1,0 +1,15 @@
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+<label>Title
+  <input type="text" name="film[title]" value="<%= film.title %>">
+</label><br>
+
+<label> IMDB URL
+  <input type="text" name="film[imdb_url]" value="<%= film.imdb_url %>">
+</label><br>
+
+<label > Description
+  <textarea name="film[description]" rows="8" cols="40"><%= film.description %></textarea>
+</label><br>
+
+<input type="submit" name="submit" value="Submit">

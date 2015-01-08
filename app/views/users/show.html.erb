@@ -9,6 +9,11 @@
     <li>Birth Date: <%= @user.birth_date %></li>
   </ul>
 
+  <content class="featured-reel">
+    <h4>Featured Reel</h4>
+    <%= render 'reels/show', reel: Reel.find(@user.featured_id) %>
+  </content>
+
   <p> Bio: <%= @user.bio %>
 
   </p>

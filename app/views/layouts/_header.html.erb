@@ -24,7 +24,7 @@
     <nav>
       <section class="nav-bar-left">
         <ul>
-          <li><a href="#">GoodSees</a></li>
+          <li><a href="">GoodSees</a></li>
           <li><a href="<%= user_films_url(current_user.id) %>">My Films</a></li>
           <li><a href="<%= reels_url %>">My Reels</a></li>
         </ul>
@@ -32,6 +32,9 @@
 
       <section class="nav-bar-right">
         <ul>
+          <% if current_user.is_admin? %>
+          <li><a href="<%= new_film_url %>">Add New Film</a></li>
+          <% end %>
           <li><a href="<%= films_url %>">Explore Films</a></li>
           <li><a href="<%= users_url %>">Explore Users</a></li>
           <li><a href="<%= user_url(current_user.id) %>"><%= current_user.username %></a></li>

@@ -1,17 +1,15 @@
-
-
+<h1>My Reels</h1>
 
 <ul class="reels-list">
+  <h4>Reel Name - Featured</h4>
   <% @reels.each do |reel| %>
-    <li><%= reel.name %>
-      <% if reel.custom %>
-        <%=button_to "Delete Reel", reel_url(reel.id), method: :delete %>
-      <% end %>
-      <ul>
-        <% reel.films.each do |film| %>
-        <li><%= link_to film.title, film_url(film.id) %></li>
-        <% end %>
-      </ul>
+    <li>
+    <%= render 'show', reel: reel %>
+    <% if reel.id == current_user.featured_id %>
+    <input type="radio" name="user[featured_id]" checked value="<%= reel.id %>">
+    <% else %>
+    <input type="radio" name="user[featured_id]" value="<%= reel.id %>">
+    <% end %>
     </li>
   <% end %>
 </ul>

@@ -19,9 +19,25 @@
     <input type="date" name="user[birth_date]" value="<%= @user.birth_date %>">
   </label>
 
+  <label> Select Featured Reel
+    <ul>
+      <% @user.reels.each do |reel| %>
+        <li> <%= reel.name %>
+          <% if reel.id == current_user.featured_id %>
+            <input type="radio" name="user[featured_id]" checked value="<%= reel.id %>">
+          <% else %>
+            <input type="radio" name="user[featured_id]" value="<%= reel.id %>">
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+
+  </label>
+
   <label> Bio
     <textarea name="user[bio]" rows="20" cols="80"><%= @user.bio %></textarea>
   </label>
+
 
   <input type="submit" value="Submit">
 </form>

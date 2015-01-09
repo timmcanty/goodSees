@@ -14,8 +14,12 @@
 
       <ul class="reel-list">
         <% user.reels().forEach( function (reel) { %>
-          <li class="reel-display">
-            <a href="#" reel-id="<%= reel.id %>"><%= reel.escape('name') %> (<%= reel.films().models.length %>)</a>
+          <li class="reel-display" reel-id="<%= reel.id %>">
+            <a class="reel-name" href="#" reel-id="<%= reel.id %>"><%= reel.escape('name') %> (<%= reel.films().models.length %>)</a>
+            <% if (reel.get('custom') && reel.id != GoodSees.currentUserFeaturedReel
+              ) {   %>
+              <a reel-id="<%= reel.id %>" class="delete-reel">X</a>
+            <% } %>
           </li>
         <% }) %>
       </ul>

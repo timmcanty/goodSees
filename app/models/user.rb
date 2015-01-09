@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
   validates :password_digest, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
-  has_many :session_tokens
-  has_many :reels
-  has_many :ratings
+  has_many :session_tokens, dependent: :destroy
+  has_many :reels, dependent: :destroy
+  has_many :ratings, dependent: :destroy
   has_many :films, through: :ratings
 
   before_create :build_default_reels

@@ -4,6 +4,7 @@
 
 <script charset="utf-8">
   <% if current_user %>
+    GoodSees.currentUserFeaturedReel = <%= current_user.featured_id %>;
     GoodSees.currentUser = <%= current_user.id %>;
   <% end %>
 

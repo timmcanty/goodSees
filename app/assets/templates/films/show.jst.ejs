@@ -17,7 +17,7 @@
 
 
   <section class="view-date-editable">
-    <div class="view-display">View Date:<%= rating.escape('viewDate') %></div>
+    <div class="view-display">View Date:<%= rating.escape('view_date') %></div>
     <form rating-id="<%= rating.id %>" class="date hidden">
       <input type="date" name="view_date" value="<%= rating.get('view_date') %>">
       <button class="update">Update</button>

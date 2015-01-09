@@ -24,10 +24,10 @@ class ReelsController < ApplicationController
   def destroy
     @reel = Reel.find(params[:id])
 
-    if @reel.custom
-      @reel.destroy!
+    if @reel.custom && @reel.id != current_user.featured_id
+      @reel.destroy
     else
-      flash.now[:errors] = ["Cannot delete default reels!"]
+      flash.now[:errors] = ["Cannot delete default or featured reels!"]
     end
 
     redirect_to reels_url

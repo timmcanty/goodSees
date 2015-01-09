@@ -11,7 +11,9 @@ module Api
     end
 
     def update
-      fail
+      @user = User.find(params[:id])
+      @user.update( featured_id: params[:featured_id])
+      render :show
     end
   end
 end

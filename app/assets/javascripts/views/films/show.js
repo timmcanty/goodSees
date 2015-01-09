@@ -100,10 +100,10 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
         },
         success: function (data) {
           var reel = view.model.reels().add(data);
-          var numberOfFilms = $('ul.reel-list a[reel-id="' + data.id +'"]').html().match(/\((.+)\)/)[1];
+          var numberOfFilms = $('ul.reel-list a.reel-name[reel-id="' + data.id +'"]').html().match(/\((.+)\)/)[1];
           console.log(numberOfFilms + 1)
-          var newHtml = $('ul.reel-list a[reel-id="' + data.id +'"]').html().replace(/\((.+)\)/, '(' + (parseInt(numberOfFilms)+1) + ')');
-          $('ul.reel-list a[reel-id="' + data.id +'"]').html(newHtml);
+          var newHtml = $('ul.reel-list a.reel-name[reel-id="' + data.id +'"]').html().replace(/\((.+)\)/, '(' + (parseInt(numberOfFilms)+1) + ')');
+          $('ul.reel-list a.reel-name[reel-id="' + data.id +'"]').html(newHtml);
           view.render();
         }
       });
@@ -117,9 +117,9 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
         },
         success: function (data) {
           view.model.reels().remove(data);
-          var numberOfFilms = $('ul.reel-list a[reel-id="' + data.id +'"]').html().match(/\((.+)\)/)[1];
-          var newHtml = $('ul.reel-list a[reel-id="' + data.id +'"]').html().replace(/\((.+)\)/, '(' + (parseInt(numberOfFilms)-1) + ')');
-          $('ul.reel-list a[reel-id="' + data.id +'"]').html(newHtml);
+          var numberOfFilms = $('ul.reel-list a.reel-name[reel-id="' + data.id +'"]').html().match(/\((.+)\)/)[1];
+          var newHtml = $('ul.reel-list a.reel-name[reel-id="' + data.id +'"]').html().replace(/\((.+)\)/, '(' + (parseInt(numberOfFilms)-1) + ')');
+          $('ul.reel-list a.reel-name[reel-id="' + data.id +'"]').html(newHtml);
           view.render();
         }
       });
@@ -139,13 +139,15 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
       },
       success: function (data) {
         view.model.reels().add(data[0]);
-        var numberOfFilms = $('ul.reel-list a[reel-id="' + data[0].id +'"]').html().match(/\((.+)\)/)[1];
-        var newHtml = $('ul.reel-list a[reel-id="' + data[0].id +'"]').html().replace(/\((.+)\)/, '(' + (parseInt(numberOfFilms)+1) + ')');
-        $('ul.reel-list a[reel-id="' + data.id +'"]').html(newHtml);
+        var numberOfFilms = $('ul.reel-list a.reel-name[reel-id="' + data[0].id +'"]').html().match(/\((.+)\)/)[1];
+        console.log($('ul.reel-list a.reel-name[reel-id="' + data[0].id +'"]').html());
+        var newHtml = $('ul.reel-list a.reel-name[reel-id="' + data[0].id +'"]').html().replace(/\((.+)\)/, '(' + (parseInt(numberOfFilms)+1) + ')');
+        console.log(newHtml);
+        $('ul.reel-list a.reel-name[reel-id="' + data[0].id +'"]').html(newHtml);
         view.model.reels().remove(data[1]);
-        var numberOfFilms = $('ul.reel-list a[reel-id="' + data[1].id +'"]').html().match(/\((.+)\)/)[1];
-        var newHtml = $('ul.reel-list a[reel-id="' + data[1].id +'"]').html().replace(/\((.+)\)/, '(' + (parseInt(numberOfFilms)-1) + ')');
-        $('ul.reel-list a[reel-id="' + data.id +'"]').html(newHtml);
+        numberOfFilms = $('ul.reel-list a.reel-name[reel-id="' + data[1].id +'"]').html().match(/\((.+)\)/)[1];
+        newHtml = $('ul.reel-list a.reel-name[reel-id="' + data[1].id +'"]').html().replace(/\((.+)\)/, '(' + (parseInt(numberOfFilms)-1) + ')');
+        $('ul.reel-list a.reel-name[reel-id="' + data[1].id +'"]').html(newHtml);
         view.render();
       }
     });

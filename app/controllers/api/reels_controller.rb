@@ -32,6 +32,16 @@ module Api
 
     end
 
+    def destroy
+      @reel = Reel.find(params[:id])
+      if @reel.custom && @reel.id != current_user.featured_id
+        @reel.destroy
+        render json: 'deleted'
+      else
+        render json: 'cannot delete a default or featured reel'
+      end
+    end
+
 
     private
 

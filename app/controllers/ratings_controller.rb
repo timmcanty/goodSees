@@ -44,6 +44,6 @@ class RatingsController < ApplicationController
   private
 
   def rating_params
-    params.require(:rating).permit(:rating, :view_date, :review)
+    params.require(:rating).permit(:star_rating, :view_date, :review)
   end
 end

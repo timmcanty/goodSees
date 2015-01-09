@@ -8,7 +8,7 @@ class Film < ActiveRecord::Base
 
 
   def average_rating
-    ratings.average("rating").to_f.round(3)
+    ratings.average("star_rating").to_f.round(3)
   end
 
 end

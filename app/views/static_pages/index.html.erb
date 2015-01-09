@@ -6,4 +6,9 @@
   <% if current_user %>
     GoodSees.currentUser = <%= current_user.id %>;
   <% end %>
+
+  $(document).ready(function(){
+    new GoodSees.Routers.Router({$rootEl : $('#main-content')});
+    Backbone.history.start();
+  });
 </script>

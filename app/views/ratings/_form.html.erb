@@ -3,8 +3,8 @@
 
   <label for="">Rating
     <ul>
-        <% (1..5).each do |num| %>
-          <% if rating.rating == num %>
+        <% (0..5).each do |num| %>
+          <% if rating.star_rating == num %>
             <li><input type="radio" name="rating[rating]" value="<%= num %>" checked ><%= num %></li>
           <% else %>
             <li><input type="radio" name="rating[rating]" value="<%= num %>"><%= num %></li>

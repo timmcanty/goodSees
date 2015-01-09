@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150108151406) do
+ActiveRecord::Schema.define(version: 20150109150215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,16 +37,16 @@ ActiveRecord::Schema.define(version: 20150108151406) do
   add_index "films", ["title"], name: "index_films_on_title", using: :btree
 
   create_table "ratings", force: true do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "film_id",    null: false
-    t.integer  "rating"
+    t.integer  "user_id",     null: false
+    t.integer  "film_id",     null: false
+    t.integer  "star_rating"
     t.date     "view_date"
     t.text     "review"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "ratings", ["rating"], name: "index_ratings_on_rating", using: :btree
+  add_index "ratings", ["star_rating"], name: "index_ratings_on_star_rating", using: :btree
   add_index "ratings", ["user_id", "film_id"], name: "index_ratings_on_user_id_and_film_id", using: :btree
   add_index "ratings", ["view_date"], name: "index_ratings_on_view_date", using: :btree
 

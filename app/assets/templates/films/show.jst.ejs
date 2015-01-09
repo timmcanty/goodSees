@@ -1,20 +1,56 @@
 
 <section class="film-title">
-  Title: <%= film.escape('title') %>
+  Title: <a href="/films/<%= film.id %>"><%= film.escape('title') %></a>
 </section>
 
 <section class="film-avg-rating">
   Average Rating: <%= film.escape('average_rating') %>
 </section>
 
-<section class="user-rating">
-  User's Rating: <%= rating.escape('rating') %>
-</section>
+<% if (GoodSees.currentUser == rating.get('user_id')) { %>
 
-<section class="view-date">
-  View Date:<%= rating.escape('viewDate') %>
-</section>
+  <section class="user-rating">
+    User Rating: <%= rating.escape('star_rating') %>
+    <input type="range" min="0" max="5" value=""
+      class="rating-change" step="1" rating-id="<%= rating.id %>">
+  </section>
+
+
+    <section class="view-date-editable">
+      <div class="view-display">View Date:<%= rating.escape('viewDate') %></div>
+      <form rating-id="<%= rating.id %>" class="date hidden">
+        <input type="date" name="view_date" value="<%= rating.get('view_date') %>">
+        <button class="update">Update</button>
+        <a class="cancel" href="#">Cancel</a>
+      </form>
+    </section>
+
+
+
+<% } else {%>
+
+  <section class="view-date">
+    User's Rating: <%= rating.escape('star_rating') %>
+  </section>
+
+
+<% } %>
+
+
+
 
 <section class="reels">
-  User Reels
+  User Reels:
+  <% film.get('reels').forEach( function (reel) { %>
+    <%= reel.name%>,
+  <% }) %>
+   <a class="edit-reels" href="#">edit reels</a>
 </section>
+
+<form class="hidden change-reels" film-id="<%= film.id %>">
+  <input class="watched" type="radio" name="some_name" value="">Watched
+  <input class="to-watch" type="radio" name="some_name" value="">To Watch
+</form>
+
+<input type="radio" name="some_name" value="">Watched
+<input type="radio" name="some_name" value="">To Watch

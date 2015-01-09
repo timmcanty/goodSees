@@ -6,12 +6,13 @@ GoodSees.Views.UserShow = Backbone.CompositeView.extend({
 
   events: {
     'click li.reel-display a' : 'changeReel',
-    'click button.add-new-reel' : 'createReel'
+    'click button.add-new-reel' : 'createReel',
+    'click a.edit-reels' : 'activateReelsChanger'
   },
 
   template: JST['users/show'],
 
-  render: function (model, obj, opts, reelId) {
+  render: function () {
     this.currentReel = this.currentReel || this.model.get('featured_id');
 
     var displayedReel = this.model.reels().get(this.currentReel)

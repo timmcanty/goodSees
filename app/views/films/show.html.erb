@@ -9,7 +9,7 @@
 
 <% if current_user.films.include?(@film) %>
     <%= link_to "Edit Rating", edit_rating_url(@rating.id) %>
-   <h3>Rated as: <%= @rating.rating %></h3>
+   <h3>Rated as: <%= @rating.star_rating %></h3>
    <h3>Viewed on: <%= @rating.view_date %></h3>
 
    <p>

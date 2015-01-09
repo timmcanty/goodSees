@@ -24,7 +24,6 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
   template: JST['films/show'],
 
   render: function () {
-    console.log(this.model.reels());
     var view = this;
     var content = this.template({
       rating: this.rating,

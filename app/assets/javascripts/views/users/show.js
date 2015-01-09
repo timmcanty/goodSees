@@ -14,13 +14,13 @@ GoodSees.Views.UserShow = Backbone.CompositeView.extend({
   render: function () {
     this.currentReel = this.currentReel || this.model.get('featured_id');
 
-    var displayedReel = this.model.reels().get(this.currentReel)
-
+    var displayedReel = this.model.reels().get(this.currentReel);
     if (!displayedReel) {
       return this;
     }
     var content = this.template({user: this.model});
     this.$el.html(content);
+    this.$('ul.reel-list a[reel-id="' + this.currentReel + '"]').addClass('displayed-reel');
     this.renderFilms(displayedReel);
     return this;
   },
@@ -51,7 +51,6 @@ GoodSees.Views.UserShow = Backbone.CompositeView.extend({
     var view = this;
     event.preventDefault();
     var name = $('.new-reel-name').val();
-    console.log(name);
     $('button.add-new-reel').prop('disabled', true);
 
     this.model.reels().create({

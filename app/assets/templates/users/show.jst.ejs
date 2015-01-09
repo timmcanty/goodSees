@@ -12,10 +12,10 @@
 
     <section class="user-reels">
 
-      <ul>
+      <ul class="reel-list">
         <% user.reels().forEach( function (reel) { %>
           <li class="reel-display">
-            <a href="#" reel-id="<%= reel.id %>"><%= reel.escape('name') %></a>
+            <a href="#" reel-id="<%= reel.id %>"><%= reel.escape('name') %> (<%= reel.films().models.length %>)</a>
           </li>
         <% }) %>
       </ul>

@@ -27,16 +27,19 @@
 
   <section class="reels">
     User Reels:
-    <% film.get('reels').forEach( function (reel) { %>
-      <%= reel.name%>,
+    <% film.reels().forEach( function (reel) { %>
+      <%= reel.get('name') %>,
     <% }) %>
     <a class="edit-reels" href="#">edit reels</a>
   </section>
 
   <form class="hidden change-reels" film-id="<%= film.id %>">
     <ul>
-      <li><input type="radio" name="default" value="<%= userReels.findWhere( {name: 'Watched'} ).id %>">Watched</li>
-      <li><input type="radio" name="default" value="<%= userReels.findWhere( {name: 'To Watch'} ).id %>">To Watch</li>
+      <li><input class="watched" type="radio" name="default"
+        value="<%= userReels.findWhere( {name: 'Watched'} ).id %>">Watched</li>
+
+      <li><input class="to-watch" type="radio" name="default"
+        value="<%= userReels.findWhere( {name: 'To Watch'} ).id %>">To Watch</li>
       <% userReels.each( function (reel) { %>
 
         <% if (reel.get('name') != 'To Watch' && reel.get('name') != 'Watched') {%>

@@ -14,6 +14,7 @@ json.reels @user.reels do |reel|
     json.reels @user.reels.select { |reel| reel.films.include?(film)} do |reel|
       json.name reel.name
       json.id reel.id
+      json.custom reel.custom
     end
   end
 

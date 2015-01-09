@@ -15,10 +15,21 @@ module Api
       @reel = Reel.find(params[:id])
       if params[:command] == 'add'
         @reel.add_film(params[:film_id])
-      else
+        render json: @reel
+      elsif params[:command] == 'remove'
         @reel.remove_film(params[:film_id])
+        render json: @reel
+      else
+        if @reel.name == 'Watched'
+          reel_to_remove_from = Reel.find_by( user_id: current_user.id, name: 'To Watch')
+        else
+          reel_to_remove_from = Reel.find_by( user_id: current_user.id, name: 'Watched')
+        end
+        @reel.add_film(params[:film_id])
+        reel_to_remove_from.remove_film(params[:film_id])
+        render json: [@reel,reel_to_remove_from]
       end
-      render json: @reel
+
     end
 
 

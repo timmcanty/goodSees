@@ -24,6 +24,8 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
   template: JST['films/show'],
 
   render: function () {
+    console.log(this.model.reels());
+    var view = this;
     var content = this.template({
       rating: this.rating,
       film: this.model,
@@ -32,6 +34,12 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
 
     this.$el.html(content);
 
+    if (this.formOpen) {
+      this.$('.change-reels').removeClass('hidden');
+    }
+    this.model.reels().each( function (reel) {
+      view.$('form.change-reels input[value=' + reel.id + ']').attr('checked', true);
+    });
 
     this.$el.find('input.rating-change').val(this.rating.get('star_rating'));
     return this;
@@ -71,10 +79,12 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
   },
 
   activateReelsChanger: function () {
+    this.formOpen = true;
     this.$('.change-reels').removeClass('hidden');
   },
 
   deactivateReelsChanger: function () {
+    this.formOpen = false;
     this.$('.change-reels').addClass('hidden');
   },
 
@@ -89,8 +99,9 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
           film_id: this.model.id,
           command: 'add'
         },
-        success: function () {
-          view.rating.collection.user.fetch();
+        success: function (data) {
+          view.model.reels().add(data);
+          view.render();
         }
       });
     } else {
@@ -101,15 +112,33 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
           film_id: this.model.id,
           command: 'remove'
         },
-        success: function () {
-          view.rating.collection.user.fetch();
+        success: function (data) {
+          view.model.reels().remove(data);
+          view.render();
         }
       });
     }
   },
 
   toggleDefaultReel: function () {
-    alert("!");
+    var view = this;
+    var addId = $(event.target).val();
+
+    $.ajax( {
+      url: "/api/reels/" + addId,
+      type: 'PUT',
+      data: {
+        film_id: this.model.id,
+        command: 'default'
+      },
+      success: function (data) {
+        view.model.reels().add(data[0]);
+        view.model.reels().remove(data[1]);
+        view.render();
+      }
+    });
+
+
   }
 
 

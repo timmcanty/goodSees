@@ -25,13 +25,12 @@ GoodSees.Views.UserShow = Backbone.CompositeView.extend({
     return this;
   },
 
+
   changeReel: function () {
     event.preventDefault();
     var reelId = $(event.target).attr('reel-id');
-    if (reelId != this.currentReel) {
-      this.currentReel = reelId;
-      this.render();
-    }
+    this.currentReel = reelId;
+    this.model.fetch();
   },
 
   renderFilms: function (reel) {

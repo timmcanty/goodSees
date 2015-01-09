@@ -16,41 +16,57 @@
   </section>
 
 
-    <section class="view-date-editable">
-      <div class="view-display">View Date:<%= rating.escape('viewDate') %></div>
-      <form rating-id="<%= rating.id %>" class="date hidden">
-        <input type="date" name="view_date" value="<%= rating.get('view_date') %>">
-        <button class="update">Update</button>
-        <a class="cancel" href="#">Cancel</a>
-      </form>
-    </section>
+  <section class="view-date-editable">
+    <div class="view-display">View Date:<%= rating.escape('viewDate') %></div>
+    <form rating-id="<%= rating.id %>" class="date hidden">
+      <input type="date" name="view_date" value="<%= rating.get('view_date') %>">
+      <button class="update">Update</button>
+      <a class="cancel" href="#">Cancel</a>
+    </form>
+  </section>
+
+  <section class="reels">
+    User Reels:
+    <% film.get('reels').forEach( function (reel) { %>
+      <%= reel.name%>,
+    <% }) %>
+    <a class="edit-reels" href="#">edit reels</a>
+  </section>
+
+  <form class="hidden change-reels" film-id="<%= film.id %>">
+    <ul>
+      <li><input type="radio" name="default" value="<%= userReels.findWhere( {name: 'Watched'} ).id %>">Watched</li>
+      <li><input type="radio" name="default" value="<%= userReels.findWhere( {name: 'To Watch'} ).id %>">To Watch</li>
+      <% userReels.each( function (reel) { %>
+
+        <% if (reel.get('name') != 'To Watch' && reel.get('name') != 'Watched') {%>
+          <li><input type="checkbox" name="[reels][<%= reel.id %>]"
+              value="<%= reel.id %>"><%= reel.get('name') %></li>
+        <% } %>
+
+      <%}) %>
+    </ul>
+    <a href="#">Done</a>
+    </form>
 
 
 
 <% } else {%>
 
-  <section class="view-date">
+  <section class="user-rating">
     User's Rating: <%= rating.escape('star_rating') %>
+  </section>
+
+  <section class="view-date">
+    ViewDate: <%= rating.escape('view_date') || "hasn't seen it!" %>
+  </section>
+
+  <section class="reels">
+    User Reels:
+    <% film.get('reels').forEach( function (reel) { %>
+      <%= reel.name%>,
+      <% }) %>
   </section>
 
 
 <% } %>
-
-
-
-
-<section class="reels">
-  User Reels:
-  <% film.get('reels').forEach( function (reel) { %>
-    <%= reel.name%>,
-  <% }) %>
-   <a class="edit-reels" href="#">edit reels</a>
-</section>
-
-<form class="hidden change-reels" film-id="<%= film.id %>">
-  <input class="watched" type="radio" name="some_name" value="">Watched
-  <input class="to-watch" type="radio" name="some_name" value="">To Watch
-</form>
-
-<input type="radio" name="some_name" value="">Watched
-<input type="radio" name="some_name" value="">To Watch

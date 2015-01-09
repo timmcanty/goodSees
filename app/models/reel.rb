@@ -7,4 +7,13 @@ class Reel < ActiveRecord::Base
   has_many :films, through: :film_reels
   has_many :film_reels
 
+
+  def add_film(film_id)
+    FilmReel.find_or_create_by( film_id: film_id, reel_id: self.id)
+  end
+
+  def remove_film(film_id)
+    FilmReel.find_by( film_id: film_id, reel_id: self.id).destroy
+  end
+
 end

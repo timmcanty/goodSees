@@ -12,7 +12,6 @@ class RatingsController < ApplicationController
 
   def update
     @rating = Rating.find(params[:id])
-
     if (params[:reels] &&
         params[:reels].keys.map(&:to_i).sort != current_user.reels.ids)
       current_user.update_reels_for_film(params[:reels].keys.map(&:to_i), @rating.film.id)

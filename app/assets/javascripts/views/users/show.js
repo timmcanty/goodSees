@@ -7,7 +7,6 @@ GoodSees.Views.UserShow = Backbone.CompositeView.extend({
   events: {
     'click li.reel-display a' : 'changeReel',
     'click button.add-new-reel' : 'createReel',
-    'click a.edit-reels' : 'activateReelsChanger'
   },
 
   template: JST['users/show'],
@@ -41,6 +40,7 @@ GoodSees.Views.UserShow = Backbone.CompositeView.extend({
 
   addFilm: function (film) {
     var filmView = new GoodSees.Views.FilmShow({
+      userReels: this.model.reels(),
       model: film,
       rating: this.model.ratings().findWhere({'film_id' : film.id})
     });

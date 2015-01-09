@@ -3,14 +3,18 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
   events: {
     'change input.rating-change': 'changeRating',
     'dblclick .view-date-editable': 'activateDateChanger',
-    'submit form' : 'updateDate',
-    'click a.cancel' : 'deactivateDateChanger',
-
+    'submit form.date' : 'updateDate',
+    'click .view-date-editable a.cancel' : 'deactivateDateChanger',
+    'click a.edit-reels' : 'activateReelsChanger',
+    'click form.change-reels a' : 'deactivateReelsChanger',
+    'change form.change-reels input:checkbox' : 'toggleReel',
+    'click form.change-reels input:radio' : 'toggleDefaultReel',
   },
 
   initialize: function (options) {
     this.$el.addClass('film-list-show')
     this.rating = options.rating;
+    this.userReels = options.userReels;
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.rating, 'sync', this.render);
   },
@@ -20,8 +24,15 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
   template: JST['films/show'],
 
   render: function () {
-    var content = this.template({ rating: this.rating, film: this.model});
+    var content = this.template({
+      rating: this.rating,
+      film: this.model,
+      userReels: this.userReels
+    });
+
     this.$el.html(content);
+
+
     this.$el.find('input.rating-change').val(this.rating.get('star_rating'));
     return this;
   },
@@ -58,6 +69,48 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
       }
     });
   },
+
+  activateReelsChanger: function () {
+    this.$('.change-reels').removeClass('hidden');
+  },
+
+  deactivateReelsChanger: function () {
+    this.$('.change-reels').addClass('hidden');
+  },
+
+  toggleReel: function () {
+    var view = this;
+    var reelId = $(event.target).val();
+    if (event.target.checked) {
+      $.ajax( {
+        url: "/api/reels/" + reelId,
+        type: 'PUT',
+        data: {
+          film_id: this.model.id,
+          command: 'add'
+        },
+        success: function () {
+          view.rating.collection.user.fetch();
+        }
+      });
+    } else {
+      $.ajax( {
+        url: "/api/reels/" + reelId,
+        type: 'PUT',
+        data: {
+          film_id: this.model.id,
+          command: 'remove'
+        },
+        success: function () {
+          view.rating.collection.user.fetch();
+        }
+      });
+    }
+  },
+
+  toggleDefaultReel: function () {
+    alert("!");
+  }
 
 
 });

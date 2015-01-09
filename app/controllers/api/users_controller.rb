@@ -9,5 +9,9 @@ module Api
       @user = User.includes(:ratings, reels: :films).find(params[:id])
       render :show
     end
+
+    def update
+      fail
+    end
   end
 end

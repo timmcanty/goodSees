@@ -11,6 +11,16 @@ module Api
       end
     end
 
+    def update
+      @reel = Reel.find(params[:id])
+      if params[:command] == 'add'
+        @reel.add_film(params[:film_id])
+      else
+        @reel.remove_film(params[:film_id])
+      end
+      render json: @reel
+    end
+
 
     private
 

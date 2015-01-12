@@ -15,6 +15,7 @@
 //= require underscore
 //= require backbone
 //= require good_sees
+//- require jquery.raty.js
 //= require_tree ../templates
 //= require_tree ./utils
 //= require_tree ./models

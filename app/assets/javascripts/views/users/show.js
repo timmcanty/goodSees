@@ -15,8 +15,6 @@ GoodSees.Views.UserShow = Backbone.CompositeView.extend({
   template: JST['users/show'],
 
   render: function () {
-    console.log('render')
-    console.log(this.model.reels());
     this.currentReel = this.currentReel || this.model.get('featured_id');
 
     var displayedReel = this.model.reels().get(this.currentReel);

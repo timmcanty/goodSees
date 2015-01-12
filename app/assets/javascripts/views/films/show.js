@@ -1,7 +1,6 @@
 GoodSees.Views.FilmShow = Backbone.View.extend({
 
   events: {
-    'change input.rating-change': 'changeRating',
     'dblclick .view-date-editable': 'activateDateChanger',
     'submit form.date' : 'updateDate',
     'click .view-date-editable a.cancel' : 'deactivateDateChanger',
@@ -30,9 +29,19 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
       film: this.model,
       userReels: this.userReels
     });
-
     this.$el.html(content);
-
+    this.$('#rating-'+this.rating.id).raty({
+      path: '/assets',
+      score: this.rating.get('star_rating'),
+      click: function(score, event) {
+        view.changeRating(score);
+      }
+    });
+    this.$('#other-rating-'+this.rating.id).raty({
+      path: '/assets',
+      readOnly: true,
+      score: this.rating.get('star_rating')
+    });
     if (this.formOpen) {
       this.$('.change-reels').removeClass('hidden');
     }
@@ -44,9 +53,9 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
     return this;
   },
 
-  changeRating: function () {
+  changeRating: function (score) {
     var view = this;
-    this.rating.set({'star_rating' : $(event.target).val() });
+    this.rating.set({'star_rating' : score });
     this.rating.save({}, {
       success: function () {
         view.rating.collection.user.fetch();
@@ -101,7 +110,6 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
         success: function (data) {
           var reel = view.model.reels().add(data);
           var numberOfFilms = $('ul.reel-list a.reel-name[reel-id="' + data.id +'"]').html().match(/\((.+)\)/)[1];
-          console.log(numberOfFilms + 1)
           var newHtml = $('ul.reel-list a.reel-name[reel-id="' + data.id +'"]').html().replace(/\((.+)\)/, '(' + (parseInt(numberOfFilms)+1) + ')');
           $('ul.reel-list a.reel-name[reel-id="' + data.id +'"]').html(newHtml);
           view.render();
@@ -140,9 +148,7 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
       success: function (data) {
         view.model.reels().add(data[0]);
         var numberOfFilms = $('ul.reel-list a.reel-name[reel-id="' + data[0].id +'"]').html().match(/\((.+)\)/)[1];
-        console.log($('ul.reel-list a.reel-name[reel-id="' + data[0].id +'"]').html());
         var newHtml = $('ul.reel-list a.reel-name[reel-id="' + data[0].id +'"]').html().replace(/\((.+)\)/, '(' + (parseInt(numberOfFilms)+1) + ')');
-        console.log(newHtml);
         $('ul.reel-list a.reel-name[reel-id="' + data[0].id +'"]').html(newHtml);
         view.model.reels().remove(data[1]);
         numberOfFilms = $('ul.reel-list a.reel-name[reel-id="' + data[1].id +'"]').html().match(/\((.+)\)/)[1];

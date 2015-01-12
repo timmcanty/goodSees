@@ -10,9 +10,7 @@
 <% if (GoodSees.currentUser == rating.get('user_id')) { %>
 
   <section class="user-rating">
-    User Rating: <%= rating.escape('star_rating') %>
-    <input type="range" min="0" max="5" value=""
-      class="rating-change" step="1" rating-id="<%= rating.id %>">
+    User Rating: <div id="rating-<%= rating.id %>"</div>
   </section>
 
 
@@ -57,7 +55,7 @@
 <% } else {%>
 
   <section class="user-rating">
-    User's Rating: <%= rating.escape('star_rating') %>
+    User's Rating: <div id="other-rating-<%= rating.id %>"</div>
   </section>
 
   <section class="view-date">
@@ -66,8 +64,9 @@
 
   <section class="reels">
     User Reels:
-    <% film.get('reels').forEach( function (reel) { %>
-      <%= reel.name%>,
+    <% console.log(film) %>
+    <% film.reels().each( function (reel) { %>
+      <%= reel.get('name')%>,
       <% }) %>
   </section>
 

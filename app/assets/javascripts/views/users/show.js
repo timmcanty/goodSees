@@ -26,7 +26,6 @@ GoodSees.Views.UserShow = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.$('ul.reel-list a[reel-id="' + this.currentReel + '"]').addClass('displayed-reel');
     this.renderFilms(displayedReel);
-    this.$('section.reel-films').prepend($('<button>FEATURE THIS REEL</button>').addClass('feature-reel'));
     return this;
   },
 

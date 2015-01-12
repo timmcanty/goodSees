@@ -1,11 +1,13 @@
-<div id="main-content">
 
+
+<div id="main-content" class="group">
 </div>
 
 <script charset="utf-8">
   <% if current_user %>
     GoodSees.currentUserFeaturedReel = <%= current_user.featured_id %>;
     GoodSees.currentUser = <%= current_user.id %>;
+    GoodSees.currentUserName = '<%= current_user.username %>';
   <% end %>
 
   $(document).ready(function(){

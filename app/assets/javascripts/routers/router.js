@@ -2,6 +2,8 @@ GoodSees.Routers.Router = Backbone.Router.extend({
 
   initialize: function (options) {
     this.$rootEl = options.$rootEl;
+    var headerView = new GoodSees.Views.Header();
+    $('#body-header').html(headerView.render().$el);
   },
 
   routes: {

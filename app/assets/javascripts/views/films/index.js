@@ -2,6 +2,7 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.listenTo(this.collection, "sync", this.render);
+    this.$el.addClass('films-index-body')
   },
 
   template: JST['films/index'],

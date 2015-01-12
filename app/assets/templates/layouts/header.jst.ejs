@@ -1,0 +1,32 @@
+<% if (!GoodSees.currentUser) {%>
+    <nav class="header-bar group">
+
+      <ul class="nav-bar-left group">
+        <li><a href="#"disabled> GoodSees</a></li>
+        <li><a href="#" disabled>My Films</a></li>
+        <li><a href="#" disabled>My Reels</a></li>
+      </ul>
+
+      <ul class="nav-bar-right group">
+        <li><a href="#/films">Explore Films</a></li>
+        <li><a href="/session/new">Sign In</a></li>
+        <li><a href="/users/create">Sign Up</a></li>
+      </ul>
+
+    </nav>
+<% } else { %>
+    <nav class="header-bar group">
+        <ul class="nav-bar-left group">
+          <li><a href="#">GoodSees</a></li>
+          <li><a href="#">My Films</a></li>
+          <li><a href="/reels">My Reels</a></li>
+        </ul>
+
+        <ul class="nav-bar-right group">
+          <li><a href="#/films">Explore Films</a></li>
+          <li><a href="/users">Explore Users</a></li>
+          <li><a href="#/users/<%= GoodSees.currentUser%>"><%= GoodSees.currentUserName %></a></li>
+          <li>TODO: BACKBONE LOGOUT</li>
+        </ul>
+    </nav>
+<% } %>

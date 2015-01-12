@@ -39,8 +39,15 @@ class User < ActiveRecord::Base
   end
 
   def set_featured_reel
-    watched = Reel.find_by( user_id: self.id, name: 'Watched')
-    self.update(featured_id: watched.id)
+    self.update(featured_id: self.watched.id)
+  end
+
+  def watched
+    Reel.find_by( user_id: self.id, name: 'Watched')
+  end
+
+  def to_watch
+    Reel.find_by( user_id: self.id, name: 'To Watch')
   end
 
   def update_reels_for_film(wanted_reels, film_id)
@@ -53,6 +60,7 @@ class User < ActiveRecord::Base
       end
     end
   end
+
 
 
 end

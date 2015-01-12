@@ -1,19 +1,2 @@
-<ul> LOADED
-  <% console.log(films) %>
-  <% films.forEach( function (film) { %>
-    <li>
-      <a href="/films/<%= film.id %>"><%= film.escape('title') %></a>
-      <% if (film.escape('star_rating')) { %>
-        <section class="user-rating">
-          <div id="film-<%= film.id %>"</div>
-        </section>
-      <% } else { %>
-        <section class="user-rating">
-          <button name="button">Want to See</button>
-          RATENOW!<div id="film-<%= film.id %>"</div>
-        </section>
-      <% } %>
-
-    </li>
-  <% }) %>
+<ul class="films-list">
 </ul>

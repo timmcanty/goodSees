@@ -1,0 +1,9 @@
+<a href="/films/<%= film.id %>"><%= film.escape('title') %></a>
+
+
+<section class="user-rating">
+  <div id="film-<%= film.id %>"></div>
+  <% if (!rating.id) { %>
+    <button class="want-to" name="button">Want to See</button>
+  <% } %>
+</section>

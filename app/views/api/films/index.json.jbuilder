@@ -5,7 +5,12 @@ json.array! @films do |film|
   json.average_rating film.average_rating
   film.ratings.each do |rating|
     if current_user && rating.user_id == current_user.id
-      json.star_rating rating.star_rating || true
+      json.rating do
+        json.id rating.id
+        json.star_rating rating.star_rating
+        json.film_id rating.film_id
+        json.user_id rating.user_id
+      end
     end
   end
 

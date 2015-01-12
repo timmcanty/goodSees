@@ -1,4 +1,4 @@
-GoodSees.Views.FilmIndex = Backbone.View.extend({
+GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.listenTo(this.collection, "sync", this.render);
@@ -9,15 +9,22 @@ GoodSees.Views.FilmIndex = Backbone.View.extend({
   render: function () {
     var content = this.template({films: this.collection});
     this.$el.html(content);
-    this.collection.forEach( function (film) {
-      console.log(film.get('star_rating'))
-      this.$('#film-' + film.id).raty({
-        path: '/assets',
-        score: film.get('star_rating'),
-      })
-    });
+    this.renderFilms();
+
     return this;
-  }
+  },
+
+  renderFilms: function () {
+    this.collection.each(this.addFilm.bind(this));
+  },
+
+  addFilm: function (film) {
+    var filmView = new GoodSees.Views.FilmThumbShow({
+      model: film
+    });
+    this.addSubview('ul.films-list', filmView);
+  },
+
 })
 
 // this.$('#rating-'+this.rating.id).raty({

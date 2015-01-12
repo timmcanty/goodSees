@@ -16,6 +16,15 @@ module Api
       render :show
     end
 
+    def create
+      @rating = current_user.ratings.new(rating_params)
+      if @rating.save
+        render json:   @rating
+      else
+        render json: @rating.errors.full_messages
+      end
+    end
+
 
     private
 

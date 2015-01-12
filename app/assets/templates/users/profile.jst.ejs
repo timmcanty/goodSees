@@ -1,6 +1,6 @@
 <% if (GoodSees.currentUser == user.id) {%>
 
-  <section class="profile-main">
+  <section class="profile-main group">
     <h1><%=   user.escape('username') %></h1>
     <ul class="profile-info">
       <li class="name">
@@ -17,9 +17,10 @@
         <input class="hidden edit-bday" type="date" name="birth_date" value="<%= user.escape('birth_date') %>">
       </li>
     </ul>
+  </section>
 
     <section class="profile-bio">
-      <h1>Bio:</h1>
+      <h3>Bio:</h3>
       <p class="profile-bio">
         <%= user.escape('bio') %>
       </p>
@@ -29,13 +30,12 @@
 
     <section class="profile-reel">
       Featured Reel: <%= reel.escape('name') %>
-      <ul class="films-list">
+      <ul class="films-list group">
         <% reel.films().forEach( function (film) { %>
           <li><a href="/films/<%= film.id %>"><%= film.escape('title')  %></a></li>
           <% }) %>
         </ul>
       <a href="#/users/films/<%= user.id %>">See all of <%= user.escape('username')%>'s films!'</a>
-      </section>
     </section>
 
 <% } else { %>

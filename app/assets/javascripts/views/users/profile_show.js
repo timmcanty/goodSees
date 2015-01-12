@@ -6,7 +6,7 @@ GoodSees.Views.UserProfile = Backbone.CompositeView.extend({
     'blur li.location input': 'updateLocation',
     'dblclick li.bday label': 'showEditBirthDay',
     'blur li.bday input' : 'updateBirthDay',
-    'dblclick section.profile-bio p': 'showEditBio',
+    'dblclick section.profile-bio p, h3': 'showEditBio',
     'blur section.profile-bio textarea': 'updateBio'
   },
 

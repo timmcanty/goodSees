@@ -23,6 +23,11 @@ Other Features:
 - Users can put unwatched films in a 'to watch' reel (Backbone?)
 - Users can search the site for films
 
+Backbone TODO:
+- Explore Films Index page
+- Backbone auth
+- Links to other users
+
 
 
 

@@ -1,0 +1,59 @@
+<% if (GoodSees.currentUser == user.id) {%>
+
+  <section class="profile-main">
+    <h1><%=   user.escape('username') %></h1>
+    <ul class="profile-info">
+      <li class="name">
+        <label>Name:<%= user.escape('name') %></label>
+        <input class="hidden" type="text" name="user[name]" value="<%= user.escape('name') %>">
+      </li>
+      <li class="email">Email:<%= user.escape('email') %></li>
+      <li class="location">
+        <label>Location: <%= user.escape('location') %></label>
+        <input class="hidden edit-loc" type="text" name="location" value="<%= user.escape('location') %>">
+      </li>
+      <li class="bday">Birth Date: <%= user.escape('birth_date') %>
+        <input class="hidden edit-bday" type="date" name="birth_date" value="<%= user.escape('birth_date') %>">
+      </li>
+    </ul>
+    <p class="profile-bio">
+      Bio: <%= user.escape('bio') %>
+    </p>
+
+    <section class="profile-reel">
+      Featured Reel: <%= reel.escape('name') %>
+      <ul class="films-list">
+        <% reel.films().forEach( function (film) { %>
+          <li><a href="/films/<%= film.id %>"><%= film.escape('title')  %></a></li>
+          <% }) %>
+        </ul>
+      </section>
+    </section>
+
+<% } else { %>
+
+  <section class="profile-main">
+    <% console.log(user) %>
+    <h1><%=   user.escape('username') %></h1>
+    <ul class="profile-info">
+      <li>Name:<%= user.escape('name') %></li>
+      <li>Email:<%= user.escape('email') %></li>
+      <li>Location: <%= user.escape('location') %></li>
+      <li>Birth Date: <%=   user.escape('birth_date') %></li>
+    </ul>
+    <p class="profile-bio">
+      Bio: <%= user.escape('bio') %>
+    </p>
+
+    <section class="profile-reel">
+      <% console.log(reel) %>
+      Featured Reel: <%= reel.escape('name') %>
+      <ul class="films-list">
+        <% reel.films().forEach( function (film) { %>
+          <li><a href="/films/<%= film.id %>"><%= film.escape('title')  %></a></li>
+          <% }) %>
+        </ul>
+      </section>
+    </section>
+
+<% } %>

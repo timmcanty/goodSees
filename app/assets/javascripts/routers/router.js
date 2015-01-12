@@ -6,7 +6,9 @@ GoodSees.Routers.Router = Backbone.Router.extend({
 
   routes: {
     '' : 'showCurrentUsersFilms',
-    'users/:id' : 'showUserFilms'
+    'users/films/:id' : 'showUserFilms',
+    'users/:id' : 'showUserProfile'
+
   },
 
 
@@ -19,5 +21,12 @@ GoodSees.Routers.Router = Backbone.Router.extend({
 
   showCurrentUsersFilms: function () {
     this.showUserFilms(GoodSees.currentUser);
+  },
+
+  showUserProfile: function (id) {
+    var user = new GoodSees.Models.User({id: id});
+    user.fetch();
+    var userProfile = new GoodSees.Views.UserProfile({model: user});
+    this.$rootEl.html(userProfile.render().$el);
   }
 });

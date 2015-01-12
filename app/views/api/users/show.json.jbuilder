@@ -1,4 +1,4 @@
-json.extract! @user, :username, :id, :featured_id
+json.extract! @user, :username, :id, :featured_id, :email, :name, :location, :birth_date, :bio
 
 json.reels @user.reels do |reel|
   json.id reel.id

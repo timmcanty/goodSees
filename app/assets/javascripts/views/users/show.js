@@ -9,7 +9,8 @@ GoodSees.Views.UserShow = Backbone.CompositeView.extend({
     'click li.reel-display a.reel-name' : 'changeReel',
     'click button.add-new-reel' : 'createReel',
     'click button.feature-reel' : 'changeFeaturedReel',
-    'click ul.reel-list a.delete-reel' : 'deleteReel'
+    'click ul.reel-list a.delete-reel' : 'deleteReel',
+    'click section.user-info h1' : 'goToProfile'
   },
 
   template: JST['users/show'],
@@ -27,6 +28,10 @@ GoodSees.Views.UserShow = Backbone.CompositeView.extend({
     this.renderFilms(displayedReel);
     this.$('section.reel-films').prepend($('<button>FEATURE THIS REEL</button>').addClass('feature-reel'));
     return this;
+  },
+
+  goToProfile: function () {
+    Backbone.history.navigate('users/' + this.model.id, {trigger: true});
   },
 
 

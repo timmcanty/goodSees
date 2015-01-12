@@ -12,8 +12,14 @@ module Api
 
     def update
       @user = User.find(params[:id])
-      @user.update( featured_id: params[:featured_id])
+      @user.update(user_params)
       render :show
+    end
+
+    private
+
+    def user_params
+      params.require(:user).permit(:featured_id,:name, :location)
     end
   end
 end

@@ -1,0 +1,11 @@
+<label>User Search:
+  <input type="text" name="some_name" value="TODO">
+</label>
+
+
+<ul class="users-index">
+  <% console.log(users) %>
+  <% users.forEach( function (user) {%>
+    <li><a href="#/users/films/<%= user.id %>"><%= user.escape('username') %></a></li>
+  <% }) %>
+</ul>

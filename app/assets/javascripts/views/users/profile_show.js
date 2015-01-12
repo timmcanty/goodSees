@@ -3,7 +3,11 @@ GoodSees.Views.UserProfile = Backbone.CompositeView.extend({
     'dblclick li.name label' : 'showEditName',
     'blur li.name input': 'updateName',
     'dblclick li.location label' : 'showEditLocation',
-    'blur li.location input': 'updateLocation'
+    'blur li.location input': 'updateLocation',
+    'dblclick li.bday label': 'showEditBirthDay',
+    'blur li.bday input' : 'updateBirthDay',
+    'dblclick section.profile-bio p': 'showEditBio',
+    'blur section.profile-bio textarea': 'updateBio'
   },
 
   template: JST['users/profile'],
@@ -48,8 +52,30 @@ GoodSees.Views.UserProfile = Backbone.CompositeView.extend({
     this.model.save();
   },
 
-  a: function () {
-    console.log(event.target);
+  showEditBirthDay: function () {
+    this.$('li.bday input').removeClass('hidden');
+    this.$('li.bday label').addClass('hidden');
+  },
+
+  updateBirthDay: function () {
+    var birthday = $(event.target).val();
+    this.$('li.bday label').removeClass('hidden');
+    this.$('li.bday input').addClass('hidden');
+    this.model.set({birth_date: birthday});
+    this.model.save();
+  },
+
+  showEditBio: function () {
+    this.$('section.profile-bio textarea').removeClass('hidden');
+    this.$('section.profile-bio p').addClass('hidden');
+  },
+
+  updateBio: function () {
+    var bio = $(event.target).val();
+    this.$('section.profile-bio p').removeClass('hidden');
+    this.$('section.profile-bio textarea').addClass('hidden');
+    this.model.set({bio: bio});
+    this.model.save();
   }
 
 

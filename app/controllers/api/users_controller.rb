@@ -2,6 +2,7 @@ module Api
   class UsersController < ApiController
 
     def index
+      @users = User.all
       render :index
     end
 
@@ -19,7 +20,7 @@ module Api
     private
 
     def user_params
-      params.require(:user).permit(:featured_id,:name, :location)
+      params.require(:user).permit(:featured_id,:name, :location, :birth_date, :bio)
     end
   end
 end

@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :location
       t.integer :featured_id
-      t.datetime :birth_date
+      t.date :birth_date
       t.text :bio
       t.timestamps
     end

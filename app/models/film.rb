@@ -5,6 +5,7 @@ class Film < ActiveRecord::Base
   has_many :film_reels
   has_many :reels, through: :film_reels
   has_many :ratings
+  has_many :users, through: :ratings
 
 
   def average_rating

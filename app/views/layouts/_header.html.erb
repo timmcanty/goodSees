@@ -1,37 +1,32 @@
 
 <% if current_user.nil? %>
   <header>
-    <nav class="header-bar">
-      <section class="nav-bar-left">
-        <ul>
-          <li><a href="#">GoodSees</a></li>
-          <li><a href="#" disabled>My Films</a></li>
-          <li><a href="#" disabled>My Reels</a></li>
-        </ul>
-      </section>
+    <nav class="header-bar group">
 
-      <section class="nav-bar-right">
-        <ul>
-          <li><a href="#" disabled >Explore Films</a></li>
-          <li><%= link_to "Sign in", new_session_url %></li>
-          <li><%= link_to "Sign up", new_user_url %></li>
-        </ul>
-      </section>
+      <ul class="nav-bar-left group">
+        <li><a href="#">GoodSees</a></li>
+        <li><a href="#" disabled>My Films</a></li>
+        <li><a href="#" disabled>My Reels</a></li>
+      </ul>
+
+      <ul class="nav-bar-right group">
+        <li><a href="#" disabled >Explore Films</a></li>
+        <li><%= link_to "Sign in", new_session_url %></li>
+        <li><%= link_to "Sign up", new_user_url %></li>
+      </ul>
+
     </nav>
   </header>
 <% else %>
   <header>
-    <nav>
-      <section class="nav-bar-left">
-        <ul>
+    <nav class="header-bar group">
+        <ul class="nav-bar-left group">
           <li><a href="/">GoodSees</a></li>
           <li><a href="<%= user_films_url(current_user.id) %>">My Films</a></li>
           <li><a href="<%= reels_url %>">My Reels</a></li>
         </ul>
-      </section>
 
-      <section class="nav-bar-right">
-        <ul>
+        <ul class="nav-bar-right group">
           <% if current_user.is_admin? %>
           <li><a href="<%= new_film_url %>">Add New Film</a></li>
           <% end %>
@@ -40,7 +35,6 @@
           <li><a href="<%= user_url(current_user.id) %>"><%= current_user.username %></a></li>
           <li><%= button_to "Logout", session_url, method: :delete %></li>
         </ul>
-      </section>
     </nav>
   </header>
 <% end %>

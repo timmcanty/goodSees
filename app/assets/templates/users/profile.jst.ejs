@@ -40,21 +40,27 @@
   <section class="profile-main group">
     <h1><%=   user.escape('username') %></h1>
     <ul class="profile-info">
-      <li>Name:<%= user.escape('name') %></li>
+      <li class="name">Name:<%= user.escape('name') %></li>
       <li>Email:<%= user.escape('email') %></li>
       <li>Location: <%= user.escape('location') %></li>
       <li>Birth Date: <%=   user.escape('birth_date') %></li>
     </ul>
-    <p class="profile-bio">
-      Bio: <%= user.escape('bio') %>
-    </p>
+  </section>
+
+    <section class="profile-bio">
+      <h3>Bio</h3>
+      <p class="profile-bio">
+        <%= user.escape('bio') %>
+      </p>
+    </section>
+
 
     <section class="profile-reel">
       Featured Reel: <%= reel.escape('name') %>
-      <ul class="films-list">
+      <ul class="films-list group">
       </ul>
       <a href="#/users/films/<%= user.id %>">See all of <%= user.escape('username')%>'s films!'</a>
       </section>
-    </section>
+
 
 <% } %>

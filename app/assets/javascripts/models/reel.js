@@ -3,7 +3,7 @@ GoodSees.Models.Reel = Backbone.Model.extend({
 
   films: function () {
     if(!this._films) {
-      this._films = new GoodSees.Collections.Films([], {reel: this});
+      this._films = new GoodSees.Collections.Films([], {reel: this, user: this.collection.user});
     }
 
     return this._films

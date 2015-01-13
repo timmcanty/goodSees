@@ -88,7 +88,6 @@ GoodSees.Views.UserProfile = Backbone.CompositeView.extend({
     var filmView = new GoodSees.Views.FilmThumbShow({
       model: film,
       rating: this.model.ratings().findWhere({film_id: film.id}),
-      currentRating: this.model.currentRatings().findWhere({film_id: film.id})
     });
     this.addSubview('ul.films-list', filmView);
   },

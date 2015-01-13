@@ -5,9 +5,8 @@ GoodSees.Views.FilmThumbShow = Backbone.View.extend({
   },
 
   initialize: function (options) {
-    options.rating && this.model.currentUserRating(options.currentRating);
     this.listenTo(this.model, 'sync', this.render);
-    this.listenTo(this.model.currentUserRating(), 'sync', this.render);
+    this.listenTo(this.model.userRating(), 'sync', this.render);
   },
 
   tagName: 'li',
@@ -16,7 +15,7 @@ GoodSees.Views.FilmThumbShow = Backbone.View.extend({
 
   render: function () {
     var view = this;
-    var content = this.template({film: this.model, rating: this.model.currentUserRating()});
+    var content = this.template({film: this.model, rating: this.model.userRating()});
     this.$el.html(content);
     if (!GoodSees.currentUser) {
       this.$('button').prop('disabled', true);
@@ -24,9 +23,9 @@ GoodSees.Views.FilmThumbShow = Backbone.View.extend({
     this.$('#film-' + this.model.id).raty({
       path: '/assets',
       readOnly: function () {
-        return !GoodSees.currentUser
+        return !GoodSees.currentUser || (view.model.collection.user.id != GoodSees.currentUser)
       },
-      score: this.model.currentUserRating().get('star_rating') || 0,
+      score: this.model.userRating().get('star_rating') || 0,
       click: function (score, event) {
         view.submitRating(score);
       }
@@ -35,19 +34,19 @@ GoodSees.Views.FilmThumbShow = Backbone.View.extend({
   },
 
   submitRating: function (score) {
-    this.model.currentUserRating().set({
-      id: this.model.currentUserRating().id,
+    this.model.userRating().set({
+      id: this.model.userRating().id,
       film_id: this.model.id,
       star_rating: score
     });
-    this.model.currentUserRating().save();
+    this.model.userRating().save();
   },
 
   wantToWatch: function () {
-    this.model.currentUserRating().set({
+    this.model.userRating().set({
       film_id: this.model.id,
     });
-    this.model.currentUserRating().save();
+    this.model.userRating().save();
     this.$('button.want-to').addClass('hidden');
   }
 

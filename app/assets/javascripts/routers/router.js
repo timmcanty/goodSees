@@ -16,8 +16,10 @@ GoodSees.Routers.Router = Backbone.Router.extend({
   },
 
   filmsIndex: function () {
-    var films = new GoodSees.Collections.Films();
+    var currentUser = new GoodSees.Models.User({id: GoodSees.currentUser});
+    var films = new GoodSees.Collections.Films([], {user: currentUser});
     films.fetch();
+    currentUser.fetch();
     var filmsIndexShow = new GoodSees.Views.FilmIndex({collection: films});
     this.$rootEl.html(filmsIndexShow.render().$el);
   },

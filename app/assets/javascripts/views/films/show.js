@@ -12,10 +12,9 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
 
   initialize: function (options) {
     this.$el.addClass('film-list-show')
-    this.rating = options.rating;
     this.userReels = options.userReels;
     this.listenTo(this.model, 'sync', this.render);
-    this.listenTo(this.rating, 'sync', this.render);
+    this.listenTo(this.model.userRating(), 'sync', this.render);
   },
 
   tagName: 'li',
@@ -23,24 +22,25 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
   template: JST['films/show'],
 
   render: function () {
+    console.log(this.model.collection.user)
     var view = this;
     var content = this.template({
-      rating: this.rating,
+      rating: this.model.userRating(),
       film: this.model,
       userReels: this.userReels
     });
     this.$el.html(content);
-    this.$('#rating-'+this.rating.id).raty({
+    this.$('#rating-'+this.model.userRating().id).raty({
       path: '/assets',
-      score: this.rating.get('star_rating'),
+      score: this.model.userRating().get('star_rating'),
       click: function(score, event) {
         view.changeRating(score);
       }
     });
-    this.$('#other-rating-'+this.rating.id).raty({
+    this.$('#other-rating-'+this.model.userRating().id).raty({
       path: '/assets',
       readOnly: true,
-      score: this.rating.get('star_rating')
+      score: this.model.userRating().get('star_rating')
     });
     if (this.formOpen) {
       this.$('.change-reels').removeClass('hidden');
@@ -49,16 +49,16 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
       view.$('form.change-reels input[value=' + reel.id + ']').attr('checked', true);
     });
 
-    this.$el.find('input.rating-change').val(this.rating.get('star_rating'));
+    this.$el.find('input.rating-change').val(this.model.userRating().get('star_rating'));
     return this;
   },
 
   changeRating: function (score) {
     var view = this;
-    this.rating.set({'star_rating' : score });
-    this.rating.save({}, {
+    this.model.userRating().set({'star_rating' : score });
+    this.model.userRating().save({}, {
       success: function () {
-        view.rating.collection.user.fetch();
+        view.model.collection.user.fetch();
       }
     });
   },
@@ -77,10 +77,10 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
     event.preventDefault();
     var newDate = $(event.target).serializeJSON().view_date;
     var view = this;
-    this.rating.set({'view_date' : newDate });
-    this.rating.save({}, {
+    this.model.userRating().set({'view_date' : newDate });
+    this.model.userRating().save({}, {
       success: function () {
-        view.rating.collection.user.fetch();
+        view.model.collection.user.fetch();
         view.deactiveDateChanger();
       }
     });

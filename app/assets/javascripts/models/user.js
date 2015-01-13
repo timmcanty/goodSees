@@ -20,7 +20,7 @@ GoodSees.Models.User = Backbone.Model.extend({
   reels: function () {
     if(!this._reels) {
       this._reels = new GoodSees.Collections.Reels([], {user: this});
-    }
+;    }
 
     return this._reels
   },

@@ -27,16 +27,3 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
   },
 
 })
-
-// this.$('#rating-'+this.rating.id).raty({
-//   path: '/assets',
-//   score: this.rating.get('star_rating'),
-//   click: function(score, event) {
-//     view.changeRating(score);
-//   }
-// });
-// this.$('#other-rating-'+this.rating.id).raty({
-//   path: '/assets',
-//   readOnly: true,
-//   score: this.rating.get('star_rating')
-// });

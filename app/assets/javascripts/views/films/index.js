@@ -4,7 +4,7 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
   },
 
   initialize: function () {
-    this.listenTo(this.collection, "sync add", this.render);
+    this.listenTo(this.collection, "sync", this.render);
     this.$el.addClass('films-index-body')
   },
 
@@ -45,7 +45,6 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
       },
       success: function (response) {
         var data = JSON.parse(response);
-        console.log(data.Poster);
         if (data.Response == 'True') {
           var film = new GoodSees.Models.Film({
             title: data.Title,
@@ -56,6 +55,7 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
           film.save([], {
             success: function (){
               view.collection.add(film);
+              view.addFilm(film);
             },
             error: function () {
               alert('FILM ALREADY EXISTS');

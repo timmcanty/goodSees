@@ -52,19 +52,3 @@ GoodSees.Views.FilmThumbShow = Backbone.View.extend({
   }
 
 });
-
-// $.ajax( {
-//   url: "/api/reels/" + reelId,
-//   type: 'PUT',
-//   data: {
-//     film_id: this.model.id,
-//     command: 'add'
-//   },
-//   success: function (data) {
-//     var reel = view.model.reels().add(data);
-//     var numberOfFilms = $('ul.reel-list a.reel-name[reel-id="' + data.id +'"]').html().match(/\((.+)\)/)[1];
-//     var newHtml = $('ul.reel-list a.reel-name[reel-id="' + data.id +'"]').html().replace(/\((.+)\)/, '(' + (parseInt(numberOfFilms)+1) + ')');
-//     $('ul.reel-list a.reel-name[reel-id="' + data.id +'"]').html(newHtml);
-//     view.render();
-//   }
-// });

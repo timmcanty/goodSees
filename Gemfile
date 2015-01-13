@@ -45,6 +45,7 @@ group :production do
 end
 
 gem 'backbone-on-rails'
+gem 'kaminari'
 
 # Use unicorn as the app server
 # gem 'unicorn'

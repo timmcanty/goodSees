@@ -10,7 +10,7 @@ module Api
     def create
       @film = Film.new(film_params)
       if @film.save
-        render json: @film
+        render :show
       else
         render json: @film.errors.full_messages, status: :unprocessable_entity
       end

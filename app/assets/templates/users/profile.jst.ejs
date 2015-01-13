@@ -31,16 +31,13 @@
     <section class="profile-reel">
       Featured Reel: <%= reel.escape('name') %>
       <ul class="films-list group">
-        <% reel.films().forEach( function (film) { %>
-          <li><a href="/films/<%= film.id %>"><%= film.escape('title')  %></a></li>
-          <% }) %>
-        </ul>
+      </ul>
       <a href="#/users/films/<%= user.id %>">See all of <%= user.escape('username')%>'s films!'</a>
     </section>
 
 <% } else { %>
 
-  <section class="profile-main">
+  <section class="profile-main group">
     <h1><%=   user.escape('username') %></h1>
     <ul class="profile-info">
       <li>Name:<%= user.escape('name') %></li>
@@ -55,11 +52,8 @@
     <section class="profile-reel">
       Featured Reel: <%= reel.escape('name') %>
       <ul class="films-list">
-        <% reel.films().forEach( function (film) { %>
-          <li><a href="/films/<%= film.id %>"><%= film.escape('title')  %></a></li>
-          <% }) %>
-        </ul>
-        <a href="#/users/films/<%= user.id %>">See all of <%= user.escape('username')%>'s films!'</a>
+      </ul>
+      <a href="#/users/films/<%= user.id %>">See all of <%= user.escape('username')%>'s films!'</a>
       </section>
     </section>
 

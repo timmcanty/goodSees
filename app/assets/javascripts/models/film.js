@@ -9,7 +9,10 @@ GoodSees.Models.Film = Backbone.Model.extend({
     return this._reels
   },
 
-  currentUserRating : function () {
+  currentUserRating : function (rating) {
+    if (rating) {
+      this._currentUserRating = rating
+    }
     if(!this._currentUserRating) {
       this._currentUserRating = new GoodSees.Models.Rating([], {film : this});
     }

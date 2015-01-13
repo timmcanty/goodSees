@@ -5,6 +5,7 @@ GoodSees.Views.FilmThumbShow = Backbone.View.extend({
   },
 
   initialize: function (options) {
+    options.rating && this.model.currentUserRating(options.currentRating);
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.currentUserRating(), 'sync', this.render);
   },

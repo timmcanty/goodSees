@@ -24,6 +24,7 @@ GoodSees.Views.UserProfile = Backbone.CompositeView.extend({
     }
     var content = this.template({user: this.model, reel: reel});
     this.$el.html(content);
+    this.renderFilms(reel);
     return this;
   },
 
@@ -77,7 +78,20 @@ GoodSees.Views.UserProfile = Backbone.CompositeView.extend({
     this.$('section.profile-bio textarea').addClass('hidden');
     this.model.set({bio: bio});
     this.model.save();
-  }
+  },
+
+  renderFilms: function (reel) {
+    reel.films().each(this.addFilm.bind(this));
+  },
+
+  addFilm: function (film) {
+    var filmView = new GoodSees.Views.FilmThumbShow({
+      model: film,
+      rating: this.model.ratings().findWhere({film_id: film.id}),
+      currentRating: this.model.currentRatings().findWhere({film_id: film.id})
+    });
+    this.addSubview('ul.films-list', filmView);
+  },
 
 
 });

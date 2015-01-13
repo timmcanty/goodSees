@@ -30,3 +30,12 @@ json.ratings @user.ratings do |rating|
   json.view_date rating.view_date
   json.review rating.review
 end
+
+json.current_ratings current_user.ratings do |rating|
+  json.user_id rating.user_id
+  json.id rating.id
+  json.film_id rating.film_id
+  json.star_rating rating.star_rating
+  json.view_date rating.view_date
+  json.review rating.review
+end

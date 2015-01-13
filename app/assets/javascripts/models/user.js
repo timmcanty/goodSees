@@ -9,6 +9,14 @@ GoodSees.Models.User = Backbone.Model.extend({
     return this._ratings;
   },
 
+  currentRatings: function () {
+    if (!this._currentRatings) {
+      this._currentRatings = new GoodSees.Collections.Ratings([], {user:  new GoodSees.Models.User({id: GoodSees.currentUser})});
+    }
+
+    return this._currentRatings;
+  },
+
   reels: function () {
     if(!this._reels) {
       this._reels = new GoodSees.Collections.Reels([], {user: this});
@@ -27,6 +35,10 @@ GoodSees.Models.User = Backbone.Model.extend({
     if (response.reels) {
       this.reels().set( response.reels, { parse: true});
       delete response.reels;
+    }
+    if (response.current_ratings) {
+      this.currentRatings().set( response.current_ratings, { parse: true});
+      delete response.current_ratings;
     }
 
     return response;

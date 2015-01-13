@@ -4,7 +4,6 @@
 
 
 <ul class="users-index">
-  <% console.log(users) %>
   <% users.forEach( function (user) {%>
     <li><a href="#/users/films/<%= user.id %>"><%= user.escape('username') %></a></li>
   <% }) %>

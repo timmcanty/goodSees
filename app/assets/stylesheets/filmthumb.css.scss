@@ -1,0 +1,24 @@
+.film-thumb-show {
+  border: 1px solid black;
+  display: block;
+  float: left;
+  width: 100px;
+  height: 210px;
+  margin: 5px;
+}
+
+.film-thumb-show img.thumb-poster {
+  float: left;
+  display: block;
+  width: 100px;
+  height: 160px;
+  z-index: -1;
+}
+
+.film-thumb-show a {
+  display: hidden;
+}
+
+.film-thumb-show button {
+  margin: auto;
+}

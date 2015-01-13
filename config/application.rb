@@ -19,5 +19,13 @@ module GoodSees
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.paperclip_defaults = {
+      :storage => :s3,
+      :s3_credentials => {
+        :bucket => ENV["bucket_s3"],
+        :access_key_id => ENV["s3_key_id"],
+        :secret_access_key => ENV["s3_secret_access_key"]
+      }
+    }
   end
 end

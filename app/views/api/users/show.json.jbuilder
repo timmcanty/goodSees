@@ -1,4 +1,5 @@
 json.extract! @user, :username, :id, :featured_id, :email, :name, :location, :birth_date, :bio
+json.image_url asset_path(@user.image.url(:original))
 
 json.reels @user.reels do |reel|
   json.id reel.id
@@ -6,6 +7,7 @@ json.reels @user.reels do |reel|
   json.custom reel.custom
 
   json.films reel.films do |film|
+    json.image_url asset_path(film.image.url(:original))
     json.average_rating film.average_rating
     json.id film.id
     json.title film.title

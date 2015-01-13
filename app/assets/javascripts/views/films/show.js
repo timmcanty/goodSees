@@ -11,7 +11,7 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
   },
 
   initialize: function (options) {
-    this.$el.addClass('film-list-show')
+    this.$el.addClass('film-list-show group')
     this.userReels = options.userReels;
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.userRating(), 'sync', this.render);
@@ -22,7 +22,6 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
   template: JST['films/show'],
 
   render: function () {
-    console.log(this.model.collection.user)
     var view = this;
     var content = this.template({
       rating: this.model.userRating(),

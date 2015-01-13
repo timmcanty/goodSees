@@ -1,6 +1,16 @@
 GoodSees.Models.Film = Backbone.Model.extend({
   urlRoot: '/api/films',
 
+  toJSON: function() {
+    var json = { film : _.clone( this.attributes ) }
+
+    if (this._image) {
+      json.film.image = this._image;
+    }
+
+    return json;
+  },
+
   reels: function () {
     if(!this._reels) {
       this._reels = new GoodSees.Collections.Reels([], { film : this});

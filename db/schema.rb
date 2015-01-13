@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150109150215) do
+ActiveRecord::Schema.define(version: 20150113165735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,12 +26,16 @@ ActiveRecord::Schema.define(version: 20150109150215) do
   add_index "film_reels", ["film_id", "reel_id"], name: "index_film_reels_on_film_id_and_reel_id", unique: true, using: :btree
 
   create_table "films", force: true do |t|
-    t.string   "title",        null: false
-    t.string   "imdb_url",     null: false
+    t.string   "title",              null: false
+    t.string   "imdb_url",           null: false
     t.text     "description"
     t.datetime "validated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "films", ["title"], name: "index_films_on_title", using: :btree
@@ -70,9 +74,9 @@ ActiveRecord::Schema.define(version: 20150109150215) do
   add_index "session_tokens", ["user_id"], name: "index_session_tokens_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "password_digest",                 null: false
-    t.string   "username",                        null: false
-    t.string   "email",                           null: false
+    t.string   "password_digest",                    null: false
+    t.string   "username",                           null: false
+    t.string   "email",                              null: false
     t.string   "name"
     t.string   "location"
     t.integer  "featured_id"
@@ -80,7 +84,11 @@ ActiveRecord::Schema.define(version: 20150109150215) do
     t.text     "bio"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",              default: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

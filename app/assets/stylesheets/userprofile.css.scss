@@ -10,12 +10,20 @@ div.profile-show h1 {
   font-size: 36px;
 }
 
+div.profile-show form {
+  border: 1px solid black;
+}
+
+div.profile-show form button {
+  border: 3px solid red;
+}
+
 div.profile-show ul.profile-info {
   float: right;
   margin: 0 400px 0 0;
 }
 
-div.profile-show input {
+div.profile-show input[type='text'] {
   border: 1px solid black;
   padding: 5px;
 }

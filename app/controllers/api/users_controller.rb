@@ -20,7 +20,7 @@ module Api
     private
 
     def user_params
-      params.require(:user).permit(:featured_id,:name, :location, :birth_date, :bio)
+      params.require(:user).permit(:featured_id,:name, :location, :birth_date, :bio, :image)
     end
   end
 end

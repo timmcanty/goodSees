@@ -7,7 +7,9 @@ GoodSees.Views.UserProfile = Backbone.CompositeView.extend({
     'dblclick li.bday label': 'showEditBirthDay',
     'blur li.bday input' : 'updateBirthDay',
     'dblclick section.profile-bio p, h3': 'showEditBio',
-    'blur section.profile-bio textarea': 'updateBio'
+    'blur section.profile-bio textarea': 'updateBio',
+    "change #input-user-image" : "fileInputChange",
+    'submit #input-user-image-form' : "submitNewImage"
   },
 
   template: JST['users/profile'],
@@ -91,6 +93,42 @@ GoodSees.Views.UserProfile = Backbone.CompositeView.extend({
     });
     this.addSubview('ul.films-list', filmView);
   },
+
+  fileInputChange: function(event){
+    var that = this;
+    var file = event.currentTarget.files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function(){
+      that._updatePreview(reader.result);
+      that.model._image = reader.result;
+
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      this._updatePreview("");
+      delete this.model._image;
+
+    }
+  },
+
+  _updatePreview: function(src){
+    this.$el.find("#preview-post-image").attr("src", src);
+  },
+
+  submitNewImage: function () {
+    var view = this;
+    event.preventDefault();
+    this.model.save({}, {
+      success: function(){
+        delete view.model._image;
+        view.render();
+      }
+    });
+
+  }
 
 
 });

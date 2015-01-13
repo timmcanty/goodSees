@@ -1,5 +1,4 @@
-<a href="/films/<%= film.id %>"><%= film.escape('title') %></a>
-
+<a href="/films/<%= film.id %>"><img class="thumb-poster" src="<%= film.escape('image_url') %>" alt="" /></a>
 
 <section class="user-rating">
   <div id="film-<%= film.id %>"></div>

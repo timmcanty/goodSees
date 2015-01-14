@@ -25,7 +25,8 @@ GoodSees.Views.UserIndex = Backbone.CompositeView.extend({
 
     $.ajax({
       url: '/api/users/' + userId + '/friendables',
-      method: 'POST',
+      type: 'POST',
+      dataType: 'json',
       success: function () {
         view.collection.fetch();
       },
@@ -43,7 +44,8 @@ GoodSees.Views.UserIndex = Backbone.CompositeView.extend({
 
     $.ajax({
       url: '/api/friendables/' + userId,
-      method: 'PUT',
+      type: 'PUT',
+      dataType: 'json',
       success: function () {
         view.collection.fetch();
       },
@@ -60,7 +62,8 @@ GoodSees.Views.UserIndex = Backbone.CompositeView.extend({
 
     $.ajax({
       url: '/api/friendables/' + userId,
-      method: 'DELETE',
+      type: 'DELETE',
+      dataType: 'json',
       success: function () {
         view.collection.fetch();
       },

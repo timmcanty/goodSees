@@ -26,6 +26,6 @@ class Api::FriendablesController < ApplicationController
       friend_id: current_user.id
     )
     @friendable.remove
-    render json: 'destroyed'
+    render json: {}
   end
 end

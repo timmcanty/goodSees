@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include PgSearch
+  multisearchable against: [:username,:name,:location,:bio,:email]
   attr_reader :password
 
   has_attached_file :image, default_url: "missing-user.png"

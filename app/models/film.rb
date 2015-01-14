@@ -1,5 +1,6 @@
 class Film < ActiveRecord::Base
   include PgSearch
+  multisearchable against: [:title, :imdb_url, :description]
   pg_search_scope :search_for_film, against: [:title, :imdb_url, :description]
 
   has_attached_file :image, default_url: "missing-film.png"

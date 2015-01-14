@@ -19,5 +19,6 @@ Rails.application.routes.draw do
     resources :films
     resources :ratings
     resources :users
+    get "search", to: "searches#index"
   end
 end

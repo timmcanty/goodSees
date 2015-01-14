@@ -11,7 +11,8 @@ GoodSees.Routers.Router = Backbone.Router.extend({
     'films' : 'filmsIndex',
     'users' : 'usersIndex',
     'users/films/:id' : 'showUserFilms',
-    'users/:id' : 'showUserProfile'
+    'users/:id' : 'showUserProfile',
+    'search/:string' : 'searchSite'
 
   },
 
@@ -21,14 +22,14 @@ GoodSees.Routers.Router = Backbone.Router.extend({
     films.fetch();
     currentUser.fetch();
     var filmsIndexShow = new GoodSees.Views.FilmIndex({collection: films});
-    this.$rootEl.html(filmsIndexShow.render().$el);
+    this._swapView(filmsIndexShow)
   },
 
   showUserFilms: function (id) {
     var user = new GoodSees.Models.User({id: id});
     user.fetch();
     var userShow = new GoodSees.Views.UserShow({ model: user});
-    this.$rootEl.html(userShow.render().$el);
+    this._swapView(userShow);
   },
 
   showCurrentUsersFilms: function () {
@@ -39,13 +40,24 @@ GoodSees.Routers.Router = Backbone.Router.extend({
     var user = new GoodSees.Models.User({id: id});
     user.fetch();
     var userProfile = new GoodSees.Views.UserProfile({model: user});
-    this.$rootEl.html(userProfile.render().$el);
+    this._swapView(userProfile);
   },
 
   usersIndex: function () {
     var users = new GoodSees.Collections.Users();
     users.fetch();
     var userIndex = new GoodSees.Views.UserIndex({collection: users});
-    this.$rootEl.html(userIndex.render().$el);
+    this._swapView(userIndex);
+  },
+
+  searchSite: function (search) {
+    var searchView = new GoodSees.Views.Search({search: search});
+    this._swapView(searchView);
+  },
+
+  _swapView: function (view) {
+    this._currentView && this._currentView.remove();
+    this._currentView = view;
+    this.$rootEl.html(view.render().$el)
   }
 });

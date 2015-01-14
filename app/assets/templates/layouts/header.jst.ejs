@@ -5,6 +5,11 @@
         <li><a href="#"disabled> GoodSees</a></li>
         <li><a href="#" disabled>My Films</a></li>
         <li><a href="#" disabled>My Reels</a></li>
+        <li>
+          <label for="">Search Site:</label>
+          <input type="text" name="some_name" value="">
+          <button name="button">Search</button>
+        </li>
       </ul>
 
       <ul class="nav-bar-right group">
@@ -20,13 +25,17 @@
           <li><a href="#">GoodSees</a></li>
           <li><a href="#">My Films</a></li>
           <li><a href="/reels">My Reels</a></li>
+          <li>
+            <input type="text" id="header-search" value="">
+            <button name="button" id="header-submit">Search</button>
+          </li>
         </ul>
 
         <ul class="nav-bar-right group">
           <li><a href="#/films">Explore Films</a></li>
           <li><a href="#/users">Explore Users</a></li>
           <li><a href="#/users/<%= GoodSees.currentUser%>"><%= GoodSees.currentUserName %></a></li>
-          <li>TODO: BACKBONE LOGOUT</li>
+          <li>TODO:LOGOUT</li>
         </ul>
     </nav>
 <% } %>

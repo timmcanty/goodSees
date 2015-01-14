@@ -1,4 +1,4 @@
-GoodSees.Models.CurrentUser = BackboneAuthDemo.Models.User.extend({
+GoodSees.Models.CurrentUser = GoodSees.Models.User.extend({
 
   url: "/api/session",
 

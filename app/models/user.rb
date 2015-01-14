@@ -13,6 +13,10 @@ class User < ActiveRecord::Base
   has_many :reels, dependent: :destroy
   has_many :ratings, dependent: :destroy
   has_many :films, through: :ratings
+  has_many :friendables
+
+  has_and_belongs_to_many :friends, through: :friendables
+
 
   before_create :build_default_reels
   after_create :set_featured_reel
@@ -58,7 +62,9 @@ class User < ActiveRecord::Base
     unwanted_reels = self.reels.ids - wanted_reels
 
     User.transaction do
-      FilmReel.where("film_id = ? AND reel_id in (?)", film_id, unwanted_reels).destroy_all
+      FilmReel
+        .where("film_id = ? AND reel_id in (?)", film_id, unwanted_reels)
+        .destroy_all
       wanted_reels.each do |reel_id|
         FilmReel.find_or_create_by( film_id: film_id, reel_id: reel_id )
       end

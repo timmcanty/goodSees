@@ -26,18 +26,18 @@ GoodSees.Views.Search = Backbone.View.extend({
   },
 
   renderSearchResults: function () {
-    var container = this.$(".search-results");
-    console.log(this.searchResults);
+
     this.searchResults.each(function (model) {
       var template;
       if (model.escape('username')) {
-        console.log('user')
-        template = JST["users/search_item"]
+        var container = this.$(".user-results");
+        template = JST["users/search_item"];
+        container.append(template({model: model}));
       } else {
-        console.log('film')
-        template = JST["films/search_item"]
+        var container = this.$('.film-results');
+        template = JST["films/search_item"];
+        container.append(template({model: model}));
       }
-      container.append(template({model: model}));
     });
   },
 

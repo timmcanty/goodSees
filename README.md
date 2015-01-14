@@ -16,17 +16,16 @@ Implemented MVP:
 - Users can feature a single reel on their profile
 - Admins can add,edit, and destroy films
 - Users can see the overall ratings for a film.
-
-Other Features:
 - Users can search for other Users
-- Users can send/accept friend requests
 - Users can put unwatched films in a 'to watch' reel (Backbone?)
 - Users can search the site for films
+- Dynamic and paginated films index page
 
-Backbone TODO:
-- Explore Films Index page
-- Backbone auth
-- Links to other users
+
+Other Features:
+- Authentication in Backbone
+- Users can send/accept friend requests
+- User has Feed of Events
 
 
 

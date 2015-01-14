@@ -24,7 +24,7 @@ GoodSees.Views.UserProfile = Backbone.CompositeView.extend({
     if (!reel) {
       return this;
     }
-    var content = this.template({user: this.model, reel: reel});
+    var content = this.template({user: this.model, reel: reel, friends: this.model.friends()});
     this.$el.html(content);
     this.renderFilms(reel);
     return this;

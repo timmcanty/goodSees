@@ -30,14 +30,26 @@ GoodSees.Models.User = Backbone.Model.extend({
   reels: function () {
     if(!this._reels) {
       this._reels = new GoodSees.Collections.Reels([], {user: this});
-;    }
+    }
 
     return this._reels
+  },
+
+  friends: function () {
+    if(!this._friends) {
+      this._friends = new GoodSees.Collections.Users();
+    }
+
+    return this._friends
   },
 
 
 
   parse: function (response) {
+    if (response.friends) {
+      this.friends().set( response.friends, {parse: true});
+      delete response.friends;
+    }
     if (response.ratings) {
       this.ratings().set( response.ratings, { parse: true});
       delete response.ratings;

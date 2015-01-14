@@ -49,3 +49,28 @@ section.profile-reel ul.films-list > li {
   height: 210px;
   margin: 5px;
 }
+
+ul.friends-list > li {
+  border: 1px solid black;
+  display: block;
+  float: left;
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+}
+
+ul.friends-list img {
+  width:100px;
+  height: 100px;
+  display: block;
+  height: auto;
+}
+
+ul.friends-list > li {
+  position: relative;
+}
+
+ul.friends-list label {
+  display: block;
+  position: absolute;
+}

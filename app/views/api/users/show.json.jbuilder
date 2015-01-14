@@ -28,3 +28,10 @@ json.reels @user.reels do |reel|
     end
   end
 end
+
+json.friends @user.friends do |friend|
+  json.friend_status friend.friend_status(@user)
+  json.id friend.id
+  json.image_url asset_path(friend.image.url(:original))
+  json.username friend.username
+end

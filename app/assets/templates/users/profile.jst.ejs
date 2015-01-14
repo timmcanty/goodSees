@@ -43,6 +43,19 @@
     </section>
 
 
+    <section class="profile-friends">
+      <h1>Friends</h1>
+      <ul class="friends-list">
+        <% friends.forEach( function (friend) { %>
+          <li class="friends-list-item">
+            <label for=""><%= friend.escape('username') %></label>
+            <a href="#users/<%= friend.id %>"><img src="<%= friend.escape('image_url') %>"/></a>
+          </li>
+        <% }) %>
+      </ul>
+    </section>
+
+
 
 
 <% } else { %>

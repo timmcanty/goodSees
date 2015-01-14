@@ -16,7 +16,6 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
   template: JST['films/index'],
 
   render: function () {
-    console.log(this.collection)
     var content = this.template({
       films: this.collection,
       page: this._page,

@@ -14,8 +14,12 @@ class User < ActiveRecord::Base
   has_many :ratings, dependent: :destroy
   has_many :films, through: :ratings
   has_many :friendables
+  has_many :inverse_friendables, class_name: 'Friendable', foreign_key: :friend_id
 
-  has_and_belongs_to_many :friends, through: :friendables
+  has_many :friends, -> { where(friendables: {accepted: true})}, through: :friendables
+  has_many :requested_friends, -> { where(friendables: {accepted: false})}, through: :friendables, source: :user
+  has_many :pending_friends, -> {where(friendables: {accepted: false})}, through: :inverse_friendables, source: :friend
+
 
 
   before_create :build_default_reels
@@ -70,7 +74,4 @@ class User < ActiveRecord::Base
       end
     end
   end
-
-
-
 end

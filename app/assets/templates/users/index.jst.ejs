@@ -4,7 +4,24 @@
 
 
 <ul class="users-index">
-  <% users.forEach( function (user) {%>
-    <li><a href="#/users/films/<%= user.id %>"><%= user.escape('username') %></a></li>
+  <% users.forEach( function (user) { %>
+    <li>
+      <a href="#/users/films/<%= user.id %>"><%= user.escape('username') %></a>
+      <% if (GoodSees.currentUser != user.id) { %>
+        <% if (user.escape('friend_status') == 'Friends') { %>
+          <label>is a close, personal friend of yours</label>
+          <button user-id="<%= user.id %>" class="delete-friendship">or are they?</button>
+        <% } %>
+        <% if (user.escape('friend_status') == 'Request Sent') { %>
+          <label for="">has been sent a friendship request!</label>
+        <% } %>
+        <% if (user.escape('friend_status') == 'Request Pending') {%>
+          <button user-id="<%= user.id %>" class="accept-request" name="button">Accept Request</button>
+        <% } %>
+        <% if (user.escape('friend_status') == 'Not Friends') { %>
+          <button user-id="<%= user.id %>" class="send-request" name="button">Send Friend Request</button>
+        <% } %>
+      <% } %>
+    </li>
   <% }) %>
 </ul>

@@ -4,11 +4,10 @@ class Friendable < ActiveRecord::Base
 
   def accept
     self.update(accepted: true)
-    Friendable.create(
+    Friendable.find_or_create_by(
       user_id: self.friend_id,
       friend_id: self.user_id,
-      accepted: true
-    )
+    ).update(accepted: true)
   end
 
   def remove

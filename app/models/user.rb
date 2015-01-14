@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
   has_many :inverse_friendables, class_name: 'Friendable', foreign_key: :friend_id
 
   has_many :friends, -> { where(friendables: {accepted: true})}, through: :friendables
-  has_many :requested_friends, -> { where(friendables: {accepted: false})}, through: :friendables, source: :user
-  has_many :pending_friends, -> {where(friendables: {accepted: false})}, through: :inverse_friendables, source: :friend
+  has_many :requested_friends, -> { where(friendables: {accepted: false})}, through: :friendables, source: :friend
+  has_many :pending_friends, -> {where(friendables: {accepted: false})}, through: :inverse_friendables, source: :user
 
 
 
@@ -73,5 +73,12 @@ class User < ActiveRecord::Base
         FilmReel.find_or_create_by( film_id: film_id, reel_id: reel_id )
       end
     end
+  end
+
+  def friend_status(user)
+    return 'Friends' if self.friends.include?(user)
+    return 'Request Sent' if self.pending_friends.include?(user)
+    return 'Request Pending' if self.requested_friends.include?(user)
+    return 'Not Friends'
   end
 end

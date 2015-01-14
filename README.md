@@ -20,11 +20,11 @@ Implemented MVP:
 - Users can put unwatched films in a 'to watch' reel (Backbone?)
 - Users can search the site for films
 - Dynamic and paginated films index page
+- Users can send/accept friend requests
 
 
 Other Features:
 - Authentication in Backbone
-- Users can send/accept friend requests
 - User has Feed of Events
 
 

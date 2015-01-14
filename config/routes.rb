@@ -18,8 +18,10 @@ Rails.application.routes.draw do
     resources :reels
     resources :films
     resources :ratings
-    resources :users
-    resources :friendable, only: [:create,:update,:destroy]
+    resources :users do
+      resources :friendables, only: :create
+    end
+    resources :friendables, only: [:update,:destroy]
     get "search", to: "searches#index"
   end
 end

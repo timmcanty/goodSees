@@ -1,11 +1,8 @@
 class Api::FriendablesController < ApplicationController
 
-  def create
-    return if current_user.id == params[:id]
-    @friendable = Friendable.new(
-      from_id: current_user.id
-      to_id: params[:id]
-    )
+  def create  # sending a friend request
+    return if current_user.id == params[:user_id]
+    @friendable = current_user.friendables.new(friend_id: params[:user_id])
 
     if @friendable.save
       render json: @friendable
@@ -14,25 +11,21 @@ class Api::FriendablesController < ApplicationController
     end
   end
 
-  def update
+  def update # accepting a friend request
     @friendable = Friendable.find_by(
-      to_id: current_user.id,
-      from_id: params[:id]
+      user_id: params[:id],
+      friend_id: current_user.id
     )
-
-    if @friendable.update(accepted: true)
-      render json: @friendable
-    else
-      render json: @friendable.errors.full_messages
-    end
+    @friendable.accept
+    render json: @friendable
   end
 
-  def destroy
+  def destroy # rejecting a friend request
     @friendable = Friendable.find_by(
-      to_id: current_user.id,
-      from_id: params[:id]
+      user_id: params[:id],
+      friend_id: current_user.id
     )
-    @friendable.destroy
+    @friendable.remove
     render json: 'destroyed'
   end
 end

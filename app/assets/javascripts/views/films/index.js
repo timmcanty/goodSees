@@ -1,10 +1,14 @@
 GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
   events: {
     'submit #film-add-form': 'findAndAddFilm',
-    'submit #film-search' : 'searchFilms'
+    'submit #film-search' : 'searchFilms',
+    'click #prev-page' : 'prevPage',
+    'click #next-page' : 'nextPage'
   },
 
   initialize: function () {
+    this._searchQuery = '';
+    this._page = 1;
     this.listenTo(this.collection, "sync", this.render);
     this.$el.addClass('films-index-body')
   },
@@ -12,8 +16,13 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
   template: JST['films/index'],
 
   render: function () {
-    console.log('rendering')
-    var content = this.template({films: this.collection});
+    console.log(this.collection)
+    var content = this.template({
+      films: this.collection,
+      page: this._page,
+      searchQuery: this._searchQuery,
+      totalPages: this.collection._totalPages
+      });
     this.$el.html(content);
     this.renderFilms();
 
@@ -73,9 +82,25 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
 
   searchFilms: function () {
     event.preventDefault();
-    console.log('here')
-    var formData = $(event.target).serializeJSON().search;
-    this.collection.fetch({data: $.param({search: formData}) });
+    this._page = 1;
+    this._searchQuery = $(event.target).serializeJSON().search;
+    this.collection.fetch({data: $.param({search: this._searchQuery}) });
+  },
+
+  prevPage: function () {
+    event.preventDefault();
+    if (this._page > 1) {
+      this._page -= 1;
+      this.collection.fetch({data: $.param({page: this._page, search: this._searchQuery })});
+    }
+  },
+
+  nextPage: function () {
+    event.preventDefault();
+    if (this._page < this.collection._totalPages) {
+      this._page += 1;
+      this.collection.fetch({data: $.param({page: this._page, search: this._searchQuery })});
+    }
   }
 
 })

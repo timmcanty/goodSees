@@ -1,6 +1,6 @@
 <form id="film-add-form" action="index.html" method="post">
   <label for="">Add New Film</label>
-  <input type="text" name="title" value="">
+  <input type="text" name="title" value="<%= searchQuery %>">
   <button name="button">Submit</button>
 </form>
 
@@ -13,3 +13,7 @@
 
 <ul class="films-list group">
 </ul>
+
+<a id="prev-page" href="#" disabled>PREV 21</a>
+<a id="next-page" href="#" disabled>NEXT 21</a>
+<div>Current Page: <%= page %> of <%= totalPages %></div>

@@ -46,6 +46,7 @@ end
 
 gem 'backbone-on-rails'
 gem 'kaminari'
+gem 'pg_search'
 
 # Use unicorn as the app server
 # gem 'unicorn'

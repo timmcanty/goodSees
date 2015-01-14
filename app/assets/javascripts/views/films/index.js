@@ -1,6 +1,7 @@
 GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
   events: {
-    'submit #search-form': 'searchForFilm'
+    'submit #film-add-form': 'findAndAddFilm',
+    'submit #film-search' : 'searchFilms'
   },
 
   initialize: function () {
@@ -11,6 +12,7 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
   template: JST['films/index'],
 
   render: function () {
+    console.log('rendering')
     var content = this.template({films: this.collection});
     this.$el.html(content);
     this.renderFilms();
@@ -29,7 +31,7 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
     this.addSubview('ul.films-list', filmView);
   },
 
-  searchForFilm: function () {
+  findAndAddFilm: function () {
     var view = this;
     event.preventDefault();
     var title = $(event.target).serializeJSON().title;
@@ -67,6 +69,13 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
 
       }
     })
+  },
+
+  searchFilms: function () {
+    event.preventDefault();
+    console.log('here')
+    var formData = $(event.target).serializeJSON().search;
+    this.collection.fetch({data: $.param({search: formData}) });
   }
 
 })

@@ -2,7 +2,11 @@ module Api
   class FilmsController < ApiController
 
     def index
-      @films = Film.all.includes(:ratings)
+      if params[:search]
+        @films = Film.search_for_film(params[:search])
+      else
+        @films = Film.all.includes(:ratings)
+      end
       @ratings = current_user ? current_user.ratings : []
       render :index
     end

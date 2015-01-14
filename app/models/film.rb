@@ -1,4 +1,6 @@
 class Film < ActiveRecord::Base
+  include PgSearch
+  pg_search_scope :search_for_film, against: [:title, :imdb_url, :description]
 
   has_attached_file :image, default_url: "missing-film.png"
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/

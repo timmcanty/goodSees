@@ -5,7 +5,7 @@ module Api
       @rating = Rating.find(params[:id])
 
       if @rating.update(rating_params)
-        current_user.activities.create(mentionable_id: @rating.film_id, mentionable_type: 'Film', message: 'has reviewed') if @rating.review
+        current_user.activities.create(mentionable_id: @rating.film_id, mentionable_type: 'Film', message: 'reviewed') if @rating.review
         render json: @rating
       else
         render json: @rating.errors.full_messages, status: :unprocessable_entity
@@ -20,8 +20,8 @@ module Api
     def create
       @rating = current_user.ratings.new(rating_params)
       if @rating.save
-        current_user.activities.create(mentionable_id: @rating.film_id, mentionable_type: 'Film', message: 'has rated')
-        current_user.activities.create(mentionable_id: @rating.film_id, mentionable_type: 'Film', message: 'has reviewed') if @rating.review
+        current_user.activities.create(mentionable_id: @rating.film_id, mentionable_type: 'Film', message: 'rated')
+        current_user.activities.create(mentionable_id: @rating.film_id, mentionable_type: 'Film', message: 'reviewed') if @rating.review
         render json:   @rating
       else
         render json: @rating.errors.full_messages

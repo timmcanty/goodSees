@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115194032) do
+ActiveRecord::Schema.define(version: 20150115212842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(version: 20150115194032) do
   add_index "ratings", ["star_rating"], name: "index_ratings_on_star_rating", using: :btree
   add_index "ratings", ["user_id", "film_id"], name: "index_ratings_on_user_id_and_film_id", using: :btree
   add_index "ratings", ["view_date"], name: "index_ratings_on_view_date", using: :btree
+
+  create_table "read_marks", force: true do |t|
+    t.integer  "readable_id"
+    t.integer  "user_id",                  null: false
+    t.string   "readable_type", limit: 20, null: false
+    t.datetime "timestamp"
+  end
+
+  add_index "read_marks", ["user_id", "readable_type", "readable_id"], name: "index_read_marks_on_user_id_and_readable_type_and_readable_id", using: :btree
 
   create_table "reels", force: true do |t|
     t.integer  "user_id"

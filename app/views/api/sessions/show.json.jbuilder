@@ -1,5 +1,6 @@
 json.extract! current_user, :username, :id, :featured_id, :email, :name, :location, :birth_date, :bio
 json.image_url asset_path(current_user.image.url(:original))
+json.unread_messages Activity.unread_by(current_user).size
 
 json.reels current_user.reels do |reel|
   json.id reel.id

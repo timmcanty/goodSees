@@ -1,7 +1,7 @@
 GoodSees.Views.Header = Backbone.View.extend({
 
   initialize: function () {
-    this.listenTo(GoodSees.currentUser, 'signIn signOut', this.render)
+    this.listenTo(GoodSees.currentUser, 'signIn signOut sync', this.render)
   },
 
   events: {

@@ -1,6 +1,5 @@
 <ul class="user-feed">
   <% activities.forEach( function (activity) { %>
-    <% console.log(activity) %>
     <li>
       <%= activity.user().escape('username') %>
       <%= activity.get('message') %>

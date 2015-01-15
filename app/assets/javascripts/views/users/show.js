@@ -1,7 +1,6 @@
 GoodSees.Views.UserShow = Backbone.CompositeView.extend({
 
   initialize: function () {
-    this.model.fetch();
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.model.reels(), 'add remove', this.render);
   },
@@ -50,7 +49,7 @@ GoodSees.Views.UserShow = Backbone.CompositeView.extend({
     var filmView = new GoodSees.Views.FilmShow({
       userReels: this.model.reels(),
       model: film,
-      rating: this.model.ratings().findWhere({'film_id' : film.id})
+      rating: film.userRating(),
     });
     this.addSubview('ul.films-list', filmView)
   },

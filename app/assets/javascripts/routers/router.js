@@ -9,6 +9,7 @@ GoodSees.Routers.Router = Backbone.Router.extend({
   routes: {
     '' : 'showCurrentUsersFilms',
     'films' : 'filmsIndex',
+    'films/:id' : 'filmShow',
     'users/new' : 'newUser',
     'users' : 'usersIndex',
     'users/films/:id' : 'showUserFilms',
@@ -26,6 +27,13 @@ GoodSees.Routers.Router = Backbone.Router.extend({
     this._swapView(filmsIndexShow)
   },
 
+  filmShow: function (id) {
+    var film = new GoodSees.Models.Film({id: id, user: GoodSees.currentUser || null});
+    film.fetch();
+    var filmShow = new GoodSees.Views.FilmInfo({model: film});
+    this._swapView(filmShow);
+  },
+
   showUserFilms: function (id) {
     var user = new GoodSees.Models.User({id: id});
     user.fetch();
@@ -36,6 +44,8 @@ GoodSees.Routers.Router = Backbone.Router.extend({
   showCurrentUsersFilms: function () {
     var callback = this.showCurrentUsersFilms.bind(this);
     if (!this._requireSignedIn(callback)) { return; }
+
+    GoodSees.currentUser.fetch();
     var userShow = new GoodSees.Views.UserShow({ model: GoodSees.currentUser});
     this._swapView(userShow);
   },

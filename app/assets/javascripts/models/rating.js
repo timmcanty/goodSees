@@ -4,4 +4,8 @@ GoodSees.Models.Rating = Backbone.Model.extend({
   toJSON: function() {
     return { rating : _.clone( this.attributes ) }
   },
+
+  parse: function (response) {
+    return response;
+  }
 });

@@ -1,8 +1,10 @@
 <a href="/films/<%= film.id %>"><img class="thumb-poster" src="<%= film.escape('image_url') %>" alt="" /></a>
 
 <section class="user-rating">
-  <div id="film-<%= film.id %>"></div>
-  <% if (!rating.id) { %>
-    <button class="want-to" name="button">Want to See</button>
+  <% if (GoodSees.currentUser.isSignedIn()) {%>
+    <div id="film-<%= film.id %>"></div>
+    <% if (!rating.id) { %>
+      <button class="want-to" name="button">Want to See</button>
+    <% } %>
   <% } %>
 </section>

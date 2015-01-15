@@ -21,7 +21,7 @@ GoodSees.Models.Film = Backbone.Model.extend({
 
   userRating : function () {
     if(!this._userRating) {
-      this._userRating = new GoodSees.Models.Rating([], {film : this});
+      this._userRating = new GoodSees.Models.Rating({},{film : this});
     }
 
     return this._userRating
@@ -33,7 +33,8 @@ GoodSees.Models.Film = Backbone.Model.extend({
       delete response.reels;
     }
     if (response.rating) {
-      this.userRating().set(response.rating[0], {parse: true});
+      console.log(response.rating)
+      this.userRating().set(response.rating, {parse: true});
       delete response.rating;
     }
     return response;

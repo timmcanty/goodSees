@@ -50,19 +50,10 @@ GoodSees.Models.User = Backbone.Model.extend({
       this.friends().set( response.friends, {parse: true});
       delete response.friends;
     }
-    if (response.ratings) {
-      this.ratings().set( response.ratings, { parse: true});
-      delete response.ratings;
-    }
     if (response.reels) {
       this.reels().set( response.reels, { parse: true});
       delete response.reels;
     }
-    if (response.current_ratings) {
-      this.currentRatings().set( response.current_ratings, { parse: true});
-      delete response.current_ratings;
-    }
-
     return response;
   }
 });

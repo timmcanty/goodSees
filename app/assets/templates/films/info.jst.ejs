@@ -1,0 +1,11 @@
+<h1><%= film.get('title') %></h1>
+
+<label>Average Rating: <%= film.get('average_rating') %></label>
+<% if (GoodSees.currentUser.isSignedIn()) {%>
+<label>Your Rating: <div id="rating"></div></label>
+<% } %>
+<a href="<%= film.get('imdb_url') %>"><img src="<%= film.get('image_url') %>" alt="" /></a>
+
+<p>
+  <%= film.get('description') %>
+</p>

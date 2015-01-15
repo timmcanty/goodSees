@@ -18,14 +18,7 @@ json.reels current_user.reels do |reel|
       json.id reel.id
       json.custom reel.custom
     end
-    json.rating current_user.ratings.where(film_id: film.id) do |rating|
-      json.user_id rating.user_id
-      json.id rating.id
-      json.film_id rating.film_id
-      json.star_rating rating.star_rating
-      json.view_date rating.view_date
-      json.review rating.review
-    end
+    json.rating film.ratings.find_by(user_id: current_user.id)
   end
 end
 

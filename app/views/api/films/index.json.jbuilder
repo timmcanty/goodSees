@@ -6,13 +6,15 @@ json.films @films do |film|
   json.imdb_url film.imdb_url
   json.title film.title
   json.average_rating film.average_rating
-  json.rating current_user.ratings.where(film_id: film.id) do |rating|
-    json.user_id rating.user_id
-    json.id rating.id
-    json.film_id rating.film_id
-    json.star_rating rating.star_rating
-    json.view_date rating.view_date
-    json.review rating.review
+  if current_user
+    json.rating current_user.ratings.where(film_id: film.id) do |rating|
+      json.user_id rating.user_id
+      json.id rating.id
+      json.film_id rating.film_id
+      json.star_rating rating.star_rating
+      json.view_date rating.view_date
+      json.review rating.review
+    end
   end
 
 end

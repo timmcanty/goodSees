@@ -7,7 +7,7 @@
   <% users.forEach( function (user) { %>
     <li>
       <a href="#/users/films/<%= user.id %>"><%= user.escape('username') %></a>
-      <% if (GoodSees.currentUser != user.id) { %>
+      <% if (GoodSees.currentUser.id != user.id) { %>
         <% if (user.escape('friend_status') == 'Friends') { %>
           <label>is a close, personal friend of yours</label>
           <button user-id="<%= user.id %>" class="delete-friendship">or are they?</button>

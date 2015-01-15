@@ -7,7 +7,7 @@
   Average Rating: <%= film.escape('average_rating') %>
 </section>
 
-<% if (GoodSees.currentUser == rating.get('user_id')) { %>
+<% if (GoodSees.currentUser.id == rating.get('user_id')) { %>
 
   <section class="user-rating">
     User Rating: <div id="rating-<%= rating.id %>"</div>

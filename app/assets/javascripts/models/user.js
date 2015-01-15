@@ -21,7 +21,7 @@ GoodSees.Models.User = Backbone.Model.extend({
 
   currentRatings: function () {
     if (!this._currentRatings) {
-      this._currentRatings = new GoodSees.Collections.Ratings([], {user:  new GoodSees.Models.User({id: GoodSees.currentUser})});
+      this._currentRatings = new GoodSees.Collections.Ratings([], {user: GoodSees.currentUser});
     }
 
     return this._currentRatings;

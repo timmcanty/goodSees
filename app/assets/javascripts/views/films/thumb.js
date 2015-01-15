@@ -18,13 +18,13 @@ GoodSees.Views.FilmThumbShow = Backbone.View.extend({
     var view = this;
     var content = this.template({film: this.model, rating: this.model.userRating()});
     this.$el.html(content);
-    if (!GoodSees.currentUser) {
+    if (!GoodSees.currentUser.isSignedIn) {
       this.$('button').prop('disabled', true);
     }
     this.$('#film-' + this.model.id).raty({
       path: '/assets',
       readOnly: function () {
-        return !GoodSees.currentUser || (view.model.collection.user.id != GoodSees.currentUser)
+        return !GoodSees.currentUser.isSignedIn() || (view.model.collection.user.id != GoodSees.currentUser.id)
       },
       score: this.model.userRating().get('star_rating') || 0,
       click: function (score, event) {

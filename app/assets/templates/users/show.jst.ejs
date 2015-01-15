@@ -7,7 +7,6 @@
 
     <section class="user-info">
       <h1><%= user.escape('username') %>'s Films</h1>
-      <%= user.escape('reels') %>
     </section>
 
     <section class="user-reels">
@@ -16,7 +15,7 @@
         <% user.reels().forEach( function (reel) { %>
           <li class="reel-display" reel-id="<%= reel.id %>">
             <a class="reel-name" href="#" reel-id="<%= reel.id %>"><%= reel.escape('name') %> (<%= reel.films().models.length %>)</a>
-            <% if (reel.get('custom') && reel.id != GoodSees.currentUserFeaturedReel
+            <% if (reel.get('custom') && reel.id != GoodSees.currentUser.get('featured_id')
               ) {   %>
               <a reel-id="<%= reel.id %>" class="delete-reel">X</a>
             <% } %>
@@ -24,7 +23,7 @@
         <% }) %>
       </ul>
 
-      <% if (user.id === GoodSees.currentUser) { %>
+      <% if (user.id === GoodSees.currentUser.id) { %>
         <input type="text" class="new-reel-name" value="">
         <button class="add-new-reel" name="button">Add Reel</button>
         <button class="feature-reel">Feature Current Reel</button>

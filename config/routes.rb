@@ -15,10 +15,11 @@ Rails.application.routes.draw do
   resources :ratings, only: [:edit, :update]
 
   namespace :api, defaults: { format: :json } do
+    resource :session, only: [:show,:create,:destroy]
     resources :reels
     resources :films
     resources :ratings
-    resources :users do
+    resources :users, only: [:index, :create, :show, :update] do
       resources :friendables, only: :create
     end
     resources :friendables, only: [:update,:destroy]

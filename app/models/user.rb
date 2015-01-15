@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
   has_many :ratings, dependent: :destroy
   has_many :films, through: :ratings
   has_many :friendables
+
+  has_many :activities
+  has_many :mentions, class_name: 'Activity', as: :mentionable
+
   has_many :inverse_friendables, class_name: 'Friendable', foreign_key: :friend_id
 
   has_many :friends, -> { where(friendables: {accepted: true})}, through: :friendables
@@ -46,7 +50,9 @@ class User < ActiveRecord::Base
         bio: auth_hash[:info][:location],
         image: auth_hash[:info][:image],
         password: SecureRandom.urlsafe_base64(16),
-        email: auth_hash[:info][:nickname]
+        email: auth_hash[:info][:nickname],
+        provider: auth_hash[:provider],
+        uid: auth_hash[:uid]
       )
     end
 
@@ -101,6 +107,10 @@ class User < ActiveRecord::Base
     return 'Request Sent' if self.pending_friends.include?(user)
     return 'Request Pending' if self.requested_friends.include?(user)
     return 'Not Friends'
+  end
+
+  def feed_activities(num)
+    Activity.where(user_id: User.first.friends.ids << User.first.id).includes(:user, :mentionable).order(created_at: :desc).limit(num)
   end
 
 

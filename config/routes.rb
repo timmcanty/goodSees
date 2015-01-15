@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resource :session, only: [:show,:create,:destroy]
+    resources :activities, only: [:index]
     resources :reels
     resources :films
     resources :ratings

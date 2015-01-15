@@ -1,8 +1,6 @@
 module Api
   class FilmsController < ApiController
 
-
-
     def show
       @film = Film.find(params[:id])
       @rating = Rating.find_by(user_id: current_user.id, film_id: params[:id]) if current_user
@@ -22,6 +20,7 @@ module Api
     def create
       @film = Film.new(film_params)
       if @film.save
+        @film.mentions.create(message: 'has added the film', user_id: current_user.id)
         render :show
       else
         render json: @film.errors.full_messages, status: :unprocessable_entity

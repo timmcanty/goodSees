@@ -7,14 +7,7 @@ json.films @films do |film|
   json.title film.title
   json.average_rating film.average_rating
   if current_user
-    json.rating current_user.ratings.where(film_id: film.id) do |rating|
-      json.user_id rating.user_id
-      json.id rating.id
-      json.film_id rating.film_id
-      json.star_rating rating.star_rating
-      json.view_date rating.view_date
-      json.review rating.review
-    end
+    json.rating current_user.ratings.find_by(film_id: film.id) 
   end
 
 end

@@ -33,11 +33,10 @@ GoodSees.Models.Film = Backbone.Model.extend({
       delete response.reels;
     }
     if (response.rating) {
-      console.log(response.rating)
       this.userRating().set(response.rating, {parse: true});
       delete response.rating;
     }
     return response;
-  }
+  },
 
 });

@@ -17,6 +17,8 @@ class Api::FriendablesController < ApplicationController
       friend_id: current_user.id
     )
     @friendable.accept
+    current_user.activities.create(mentionable_id: @friendable.user_id, mentionable_type: 'User', message: 'is now friends with')
+    current_user.mentions.create(user_id: @friendable.user_id, message: 'is now friends with')
     render json: @friendable
   end
 

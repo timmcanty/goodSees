@@ -12,6 +12,7 @@ class Film < ActiveRecord::Base
   has_many :reels, through: :film_reels
   has_many :ratings
   has_many :users, through: :ratings
+  has_many :mentions, class_name: 'Activity', as: :mentionable
 
 
   def average_rating

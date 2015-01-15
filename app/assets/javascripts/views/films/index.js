@@ -40,8 +40,12 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
   },
 
   findAndAddFilm: function () {
-    var view = this;
     event.preventDefault();
+    if (!GoodSees.currentUser.isSignedIn()) {
+      alert('You must be signed in to add films!');
+      return;
+    }
+    var view = this;
     var title = $(event.target).serializeJSON().title;
 
     $.ajax({

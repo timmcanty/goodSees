@@ -1,0 +1,15 @@
+<ul class="user-feed">
+  <% activities.forEach( function (activity) { %>
+    <% console.log(activity) %>
+    <li>
+      <%= activity.user().escape('username') %>
+      <%= activity.get('message') %>
+      <% if (activity.mentionable() instanceof GoodSees.Models.User) { %>
+        <%= activity.mentionable().escape('username') %>
+      <% } else { %>
+        <%= activity.mentionable().get('title') %>
+      <% } %>
+      <%= activity.get('created_at') %> ago.
+    </li>
+  <% }) %>
+</ul>

@@ -7,7 +7,7 @@ json.films @films do |film|
   json.title film.title
   json.average_rating film.average_rating
   if current_user
-    json.rating current_user.ratings.find_by(film_id: film.id) 
+    json.rating current_user.ratings.find_by(film_id: film.id)
   end
 
 end

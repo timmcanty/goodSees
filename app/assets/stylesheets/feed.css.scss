@@ -1,0 +1,42 @@
+#main-content > div > ul.user-feed {
+  margin: auto;
+  width: 900px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid #ccc;
+}
+
+ul.user-feed > h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+ul.user-feed > li {
+  width: 860px;
+  border-top: 1px solid #ccc;
+  font-size: 20px;
+  display:block;
+  margin: auto;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  height: 120px;
+}
+
+li > section.text-notification {
+  margin-top: 40px;
+  display: block;
+  float: left;
+}
+
+ul.user-feed  img {
+  float: right;
+  display:block;
+  height: 120px;
+  width: 100px;
+  border: 2px solid #ccc;
+}
+
+ul.user-feed label.time {
+  color: #888;
+}

@@ -1,4 +1,4 @@
-<a href="/films/<%= film.id %>"><img class="thumb-poster" src="<%= film.escape('image_url') %>" alt="" /></a>
+<a href="/#films/<%= film.id %>"><img class="thumb-poster" src="<%= film.escape('image_url') %>" alt="" /></a>
 
 <section class="user-rating">
   <% if (GoodSees.currentUser.isSignedIn()) {%>

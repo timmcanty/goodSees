@@ -5,7 +5,7 @@
 
 <ul class="users-index">
   <% users.forEach( function (user) { %>
-    <li>
+    <li class="group">
       <a href="#/users/films/<%= user.id %>"><%= user.escape('username') %></a>
       <% if (GoodSees.currentUser.id != user.id) { %>
         <% if (user.escape('friend_status') == 'Friends') { %>

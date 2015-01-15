@@ -5,6 +5,13 @@ json.array! @activities do |activity|
   json.message activity.message
   json.created_at time_ago_in_words(activity.created_at)
 
-  json.mentionable activity.mentionable
-  json.user activity.user
+  json.mentionable do
+    json.extract! activity.mentionable, *activity.mentionable.class.column_names
+    json.image_url asset_path(activity.mentionable.image.url(:original))
+  end
+
+  json.user do
+    json.extract! activity.user, *activity.user.class.column_names
+    json.image_url asset_path(activity.user.image.url(:original))
+  end
 end

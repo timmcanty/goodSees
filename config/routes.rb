@@ -25,4 +25,6 @@ Rails.application.routes.draw do
     resources :friendables, only: [:update,:destroy]
     get "search", to: "searches#index"
   end
+
+  get "auth/:provider/callback" => "api/sessions#omniauth"
 end

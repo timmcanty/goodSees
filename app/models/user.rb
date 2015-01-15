@@ -32,6 +32,27 @@ class User < ActiveRecord::Base
     user.is_password?(password) ? user : nil
   end
 
+  def self.find_or_create_by_auth_hash(auth_hash)
+    user = User.find_by(
+      provider: auth_hash[:provider],
+      uid: auth_hash[:uid]
+    )
+
+    if user.nil?
+      user = User.create!(
+        username: auth_hash[:info][:nickname],
+        name: auth_hash[:info][:name],
+        location: auth_hash[:info][:location],
+        bio: auth_hash[:info][:location],
+        image: auth_hash[:info][:image],
+        password: SecureRandom.urlsafe_base64(16),
+        email: auth_hash[:info][:nickname]
+      )
+    end
+
+    user
+  end
+
   def is_password?(password)
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
@@ -81,4 +102,6 @@ class User < ActiveRecord::Base
     return 'Request Pending' if self.requested_friends.include?(user)
     return 'Not Friends'
   end
+
+
 end

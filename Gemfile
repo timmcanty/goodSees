@@ -32,6 +32,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'omniauth'
+gem 'omniauth-twitter'
 
 group :development do
   gem 'better_errors'

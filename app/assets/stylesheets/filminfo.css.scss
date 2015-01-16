@@ -27,10 +27,11 @@ section.film-info  a > img{
 section.film-info > img {
   position: absolute;
   left: 550px;
-  bottom: 200px;
+  top: 50px;
   float: right;
   display:block;
   width: 300px;
+  height: auto;
 }
 
 section.film-info-header > * {

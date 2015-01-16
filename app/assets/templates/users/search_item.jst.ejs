@@ -1,5 +1,6 @@
 <li class="user-search-show">
-  <a href="#/users/<%= model.id %>"><img src="<%= model.escape('image_url') %>" alt=""  class="search-poster" /></a>
-
-
+  <a href="#/users/<%= model.id %>">
+    <label><%= model.escape('username') %></label>
+    <img src="<%= model.escape('image_url') %>" alt=""  class="search-poster" />
+  </a>
 </li>

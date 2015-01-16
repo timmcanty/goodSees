@@ -1,9 +1,12 @@
 GoodSees.Views.SignIn = Backbone.View.extend({
 
   initialize: function (options) {
+    this.$el.addClass('sign-in');
     this.callback = options.callback;
     this.listenTo(GoodSees.currentUser, "signIn", this.signInCallback);
   },
+
+  tagName: 'section',
 
   events: {
     "submit form" : "submit"

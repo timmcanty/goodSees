@@ -18,6 +18,7 @@ GoodSees.Views.UserProfile = Backbone.CompositeView.extend({
   initialize: function () {
     this.listenTo(this.model, "sync", this.render);
     this.$el.addClass('profile-show');
+    this.$el.addClass('group');
   },
 
   render: function () {

@@ -7,8 +7,22 @@ div.films-index-body {
   border-left: 1px solid black;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
+  padding-top: 20px;
   padding-left: 20px;
   margin: auto;
   width: 880px;
   display: block;
+}
+
+div.films-index-body > form {
+  margin-bottom: 20px;
+}
+
+div.films-index-body > form button{
+  font-weight: bold;
+  padding: 3px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #00f;
+  background-color: rgb(229,224,197);
 }

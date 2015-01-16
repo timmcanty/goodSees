@@ -29,7 +29,7 @@ class Api::SessionsController < ApplicationController
   def omniauth
     user = User.find_or_create_by_auth_hash(auth_hash)
     login_user!(user)
-    redirect_to root
+    redirect_to root_url
   end
 
   protected

@@ -86,16 +86,19 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
   },
 
   activateReelsChanger: function () {
+    event.preventDefault();
     this.formOpen = true;
     this.$('.change-reels').removeClass('hidden');
   },
 
   deactivateReelsChanger: function () {
+    event.preventDefault();
     this.formOpen = false;
     this.$('.change-reels').addClass('hidden');
   },
 
   toggleReel: function () {
+    event.preventDefault();
     var view = this;
     var reelId = $(event.target).val();
     if (event.target.checked) {
@@ -134,6 +137,7 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
   },
 
   toggleDefaultReel: function () {
+    event.preventDefault();
     var view = this;
     var addId = $(event.target).val();
 

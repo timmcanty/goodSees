@@ -6,8 +6,11 @@ GoodSees.Views.UserIndex = Backbone.CompositeView.extend({
   },
 
   initialize: function () {
+    this.$el.addClass('users-index');
     this.listenTo(this.collection, 'sync', this.render);
   },
+
+  tagName: 'section',
 
   template: JST['users/index'],
 

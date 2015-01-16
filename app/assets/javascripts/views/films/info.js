@@ -25,6 +25,7 @@ GoodSees.Views.FilmInfo = Backbone.View.extend({
       click: function(score, event) {
         view.model.userRating().set({star_rating: score, film_id: view.model.id});
         view.model.userRating().save();
+        view.model.fetch();
       }
     });
     this.$('div.other-user-rating').raty({

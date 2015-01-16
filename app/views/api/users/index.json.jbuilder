@@ -6,4 +6,5 @@ json.array! @users do |user|
   if current_user
     json.friend_status user.friend_status(current_user)
   end
+  json.image_url asset_path(user.image.url(:original))
 end

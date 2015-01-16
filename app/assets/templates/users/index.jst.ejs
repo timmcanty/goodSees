@@ -1,27 +1,27 @@
-<label>User Search:
-  <input type="text" name="some_name" value="TODO">
-</label>
-
-
-<ul class="users-index">
+<h1>Users</h1>
+<ul class="users-index group">
   <% users.forEach( function (user) { %>
     <li class="group">
-      <a href="#/users/films/<%= user.id %>"><%= user.escape('username') %></a>
+
+      <a href="#/users/films/<%= user.id %>">
+        <label class="username"><%= user.escape('username') %></label>
+        <img src="<%= user.escape('image_url') %>" alt="" />
+      </a>
       <% if (GoodSees.currentUser.id != user.id) { %>
         <% if (user.escape('friend_status') == 'Friends') { %>
-          <label>is a close, personal friend of yours</label>
-          <button user-id="<%= user.id %>" class="delete-friendship">or are they?</button>
+          <label class="friend">FRIEND</label>
         <% } %>
         <% if (user.escape('friend_status') == 'Request Sent') { %>
-          <label for="">has been sent a friendship request!</label>
+            <label class="pending"for="">PENDING</label>
         <% } %>
         <% if (user.escape('friend_status') == 'Request Pending') {%>
-          <button user-id="<%= user.id %>" class="accept-request" name="button">Accept Request</button>
+            <button user-id="<%= user.id %>" class="accept-request" name="button">Accept Request</button>
         <% } %>
         <% if (user.escape('friend_status') == 'Not Friends') { %>
-          <button user-id="<%= user.id %>" class="send-request" name="button">Send Friend Request</button>
+            <button user-id="<%= user.id %>" class="send-request" name="button">Send Friend Request</button>
         <% } %>
       <% } %>
+
     </li>
   <% }) %>
 </ul>

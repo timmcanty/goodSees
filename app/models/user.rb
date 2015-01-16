@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
   end
 
   def feed_activities(num)
-    Activity.where(user_id: User.first.friends.ids << User.first.id).includes(:user, :mentionable).order(created_at: :desc).limit(num)
+    Activity.where(user_id: self.friends.ids << self.id).includes(:user, :mentionable).order(created_at: :desc).limit(num)
   end
 
 

@@ -68,6 +68,7 @@ GoodSees.Views.FilmShow = Backbone.View.extend({
   },
 
   deactivateDateChanger: function () {
+    event.preventDefault();
     this.$el.find('.view-display').removeClass('hidden');
     $(event.target).parent().addClass('hidden');
   },

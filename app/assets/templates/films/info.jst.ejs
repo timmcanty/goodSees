@@ -1,24 +1,30 @@
-<h1><%= film.get('title') %></h1>
+<section class="film-info">
 
-<label>Average Rating: <%= film.get('average_rating') %></label>
-<% if (GoodSees.currentUser.isSignedIn()) {%>
-<label>Your Rating: <div id="rating"></div></label>
-<% } %>
-<a href="<%= film.get('imdb_url') %>"><img src="<%= film.get('image_url') %>" alt="" /></a>
+  <img src="<%= film.get('image_url') %>" alt="" />
+<section class="film-info-header group">
+  <h1><%= film.get('title') %></h1>
 
-
-<section class="view-date-editable">
-  <div class="view-display">View Date: <%= film.userRating().get('view_date') %></div>
-  <form rating-id="" class="date hidden">
-    <input type="date" name="view_date" value="<%= film.userRating().get('view_date') %>">
-    <button class="update">Update</button>
-    <a class="cancel" href="#">Cancel</a>
-  </form>
+  <a href="<%= film.get('imdb_url') %>"><img src="http://uxmonty.com/img/social-media/IMDb.png" alt="" /></a>
+  <label>Average Rating: <%= film.get('average_rating') %></label>
+  <% if (GoodSees.currentUser.isSignedIn()) {%>
+  <label>Your Rating: <div id="rating"></div></label>
+  <% } %>
+  <section class="view-date-editable">
+    <div class="view-display">View Date: <%= film.userRating().get('view_date') %></div>
+    <form rating-id="" class="date hidden">
+      <input type="date" name="view_date" value="<%= film.userRating().get('view_date') %>">
+      <button class="update">Update</button>
+      <a class="cancel" href="#">Cancel</a>
+    </form>
+  </section>
+  <p>
+    Plot: <%= film.get('description') %>
+  </p>
 </section>
 
-<p>
-  <%= film.get('description') %>
-</p>
+
+
+
 
 <section class="review-editable"> Your Review:
   <p>
@@ -30,14 +36,19 @@
 
 
 <ul class="ratings">
+  <h2>User Ratings:</h2>
   <% film.ratings().forEach( function (rating) { %>
-    <li>
-      <a href="#users/<%= rating.user().id %>"><%= rating.user().get('username') %></a>
-      <img src="<%= rating.user().get('image_url') %>" alt="" />
-      <div class="other-user-rating" star-rating="<%= rating.get('star_rating') %>"></div>
+    <li class="group">
+      <section class=user-info>
+        <a href="#users/<%= rating.user().id %>"><%= rating.user().get('username') %></a>
+        <img src="<%= rating.user().get('image_url') %>" alt="" />
+        <label for="">Rating:</label>
+        <div class="other-user-rating" star-rating="<%= rating.get('star_rating') %>"></div>
+      </section>
       <p>
         <%= rating.get('review') %>
       </p>
     </li>
   <% }) %>
 </ul>
+</section>

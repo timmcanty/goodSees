@@ -4,7 +4,7 @@ GoodSees.Views.FilmInfo = Backbone.View.extend({
     'dblclick .view-date-editable': 'activateDateChanger',
     'submit form.date' : 'updateDate',
     'click .view-date-editable a.cancel' : 'deactivateDateChanger',
-    'dblclick section.review-editable' : 'activateReviewChanger',
+    'dblclick section.review-editable, section.review-editable > p' : 'activateReviewChanger',
     'click button.update-review' : 'updateReview'
   },
 
@@ -23,7 +23,7 @@ GoodSees.Views.FilmInfo = Backbone.View.extend({
       path: '/assets',
       score: this.model.userRating().get('star_rating'),
       click: function(score, event) {
-        view.model.userRating().set({star_rating: score});
+        view.model.userRating().set({star_rating: score, film_id: view.model.id});
         view.model.userRating().save();
       }
     });
@@ -43,6 +43,7 @@ GoodSees.Views.FilmInfo = Backbone.View.extend({
   },
 
   deactivateDateChanger: function () {
+    event.preventDefault();
     this.$el.find('.view-display').removeClass('hidden');
     $(event.target).parent().addClass('hidden');
   },
@@ -51,7 +52,7 @@ GoodSees.Views.FilmInfo = Backbone.View.extend({
     event.preventDefault();
     var newDate = $(event.target).serializeJSON().view_date;
     var view = this;
-    this.model.userRating().set({'view_date' : newDate });
+    this.model.userRating().set({'view_date' : newDate, 'film_id' : this.model.id });
     this.model.userRating().save({}, {
       success: function () {
         view.model.fetch();
@@ -78,7 +79,7 @@ GoodSees.Views.FilmInfo = Backbone.View.extend({
     event.preventDefault();
     var view = this;
     var review = this.$('textarea').val()
-    this.model.userRating().set({'review' : review});
+    this.model.userRating().set({'review' : review, film_id: this.model.id});
     this.model.userRating().save({},{
       success: function () {
         view.model.fetch();

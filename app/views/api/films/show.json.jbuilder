@@ -3,6 +3,7 @@ json.id @film.id
 json.imdb_url @film.imdb_url
 json.title @film.title
 json.average_rating @film.average_rating
+json.description @film.description
 
 if current_user
   json.rating @rating

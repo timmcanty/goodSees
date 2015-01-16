@@ -1,10 +1,5 @@
-<% if (GoodSees.currentUser.id == user.id) {%>
 
-  <form id="input-user-image-form">Pic
-    <input id="input-user-image" type="file" name="image" >
-    <img src="" id="preview-post-image" width="50px" height="50px"/>
-    <button name="submit">Update Image</button>
-  </form>
+<% if (GoodSees.currentUser.id == user.id) {%>
 
   <section class="profile-main group">
     <h1><%=   user.escape('username') %></h1>
@@ -26,21 +21,29 @@
     </ul>
   </section>
 
-    <section class="profile-bio">
-      <h3>Bio:</h3>
-      <p class="profile-bio">
-        <%= user.escape('bio') %>
-      </p>
-      <textarea class="hidden" name="birth_date" rows="8" cols="40"><%= user.escape('bio') %></textarea>
-    </section>
+  <a class="load-image" href="#">Change Profile Image</a>
+  <form class="change-user-image hidden" id="input-user-image-form">
+    <img src="" id="preview-post-image" width="50px" height="50px"/>
+    <input id="input-user-image" type="file" name="image" >
+    <button name="submit">Update Image</button>
+  </form>
 
 
-    <section class="profile-reel">
-      Featured Reel: <%= reel.escape('name') %>
-      <ul class="films-list group">
-      </ul>
-      <a href="#/users/films/<%= user.id %>">See all of <%= user.escape('username')%>'s films!'</a>
-    </section>
+  <section class="profile-bio">
+    <h3>Bio:</h3>
+    <p class="profile-bio">
+      <%= user.escape('bio') %>
+    </p>
+    <textarea class="hidden" name="birth_date" rows="8" cols="40"><%= user.escape('bio') %></textarea>
+  </section>
+
+
+  <section class="profile-reel">
+    <h1>Featured Reel: <%= reel.escape('name') %></h1>
+    <ul class="films-list group">
+    </ul>
+    <a href="#/users/films/<%= user.id %>">See all of <%= user.escape('username')%>'s films!'</a>
+  </section>
 
 
     <section class="profile-friends">
@@ -62,6 +65,7 @@
 
   <section class="profile-main group">
     <h1><%=   user.escape('username') %></h1>
+    <img src="<%= user.get("image_url") %>" width="100" alt="">
     <ul class="profile-info">
       <li class="name">Name:<%= user.escape('name') %></li>
       <li>Email:<%= user.escape('email') %></li>

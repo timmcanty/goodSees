@@ -33,7 +33,11 @@ ul.nav-bar-right > li {
 }
 
 ul.nav-bar-left input {
-  background: white;
+  background: #eee;
   border: 1px solid brown;
   width: 130px;
+}
+
+ul.nav-bar-left input:focus {
+  background: white;
 }

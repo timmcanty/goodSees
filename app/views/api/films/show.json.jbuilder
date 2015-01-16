@@ -16,7 +16,7 @@ end
 
 
 json.ratings @film.ratings.each do |rating|
-  next if rating.user_id == current_user.id || nil
+  next if rating.user ==  current_user
   json.extract! rating, *rating.class.column_names
   json.user do
     json.id rating.user.id

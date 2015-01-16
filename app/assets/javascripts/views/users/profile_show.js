@@ -9,7 +9,8 @@ GoodSees.Views.UserProfile = Backbone.CompositeView.extend({
     'dblclick section.profile-bio p, h3': 'showEditBio',
     'blur section.profile-bio textarea': 'updateBio',
     "change #input-user-image" : "fileInputChange",
-    'submit #input-user-image-form' : "submitNewImage"
+    'submit #input-user-image-form' : "submitNewImage",
+    'click a.load-image' : 'showImageForm'
   },
 
   template: JST['users/profile'],
@@ -70,6 +71,7 @@ GoodSees.Views.UserProfile = Backbone.CompositeView.extend({
   },
 
   showEditBio: function () {
+    if (!GoodSees.currentUser.isSignedIn() || GoodSees.currentUser.id != this.model.id) { return ;}
     this.$('section.profile-bio textarea').removeClass('hidden');
     this.$('section.profile-bio p').addClass('hidden');
   },
@@ -128,6 +130,12 @@ GoodSees.Views.UserProfile = Backbone.CompositeView.extend({
       }
     });
 
+  },
+
+  showImageForm: function () {
+    event.preventDefault();
+    $(event.target).addClass('hidden');
+    this.$('form.change-user-image').removeClass('hidden');
   }
 
 

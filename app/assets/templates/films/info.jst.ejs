@@ -6,6 +6,38 @@
 <% } %>
 <a href="<%= film.get('imdb_url') %>"><img src="<%= film.get('image_url') %>" alt="" /></a>
 
+
+<section class="view-date-editable">
+  <div class="view-display">View Date: <%= film.userRating().get('view_date') %></div>
+  <form rating-id="" class="date hidden">
+    <input type="date" name="view_date" value="<%= film.userRating().get('view_date') %>">
+    <button class="update">Update</button>
+    <a class="cancel" href="#">Cancel</a>
+  </form>
+</section>
+
 <p>
   <%= film.get('description') %>
 </p>
+
+<section class="review-editable"> Your Review:
+  <p>
+    <%= film.userRating().get('review') %>
+  </p>
+  <textarea class="hidden" name="rating[review]" rows="8" cols="40"><%= film.userRating().get('review') %></textarea>
+  <button class="update-review hidden">Update Review!</button>
+</section>
+
+
+<ul class="ratings">
+  <% film.ratings().forEach( function (rating) { %>
+    <li>
+      <a href="#users/<%= rating.user().id %>"><%= rating.user().get('username') %></a>
+      <img src="<%= rating.user().get('image_url') %>" alt="" />
+      <div class="other-user-rating" star-rating="<%= rating.get('star_rating') %>"></div>
+      <p>
+        <%= rating.get('review') %>
+      </p>
+    </li>
+  <% }) %>
+</ul>

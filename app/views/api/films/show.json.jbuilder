@@ -12,3 +12,14 @@ if current_user
     json.custom reel.custom
   end
 end
+
+
+json.ratings @film.ratings.each do |rating|
+  next if rating.user_id == current_user.id || nil
+  json.extract! rating, *rating.class.column_names
+  json.user do
+    json.id rating.user.id
+    json.username rating.user.username
+    json.image_url asset_path(rating.user.image.url(:original))
+  end
+end

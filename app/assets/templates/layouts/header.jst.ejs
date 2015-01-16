@@ -33,7 +33,7 @@
           <li><a href="#/films">Explore Films</a></li>
           <li><a href="#/users">Explore Users</a></li>
           <li><a href="#/users/<%= GoodSees.currentUser.id %>"><%= GoodSees.currentUser.get('username') %></a></li>
-          <li><div class="badge">(<%= GoodSees.currentUser.escape('unread_messages') %>)</div></li>
+          <li><div class="badge"><%= GoodSees.currentUser.escape('unread_messages') %></div></li>
           <li><a class="sign-out" href="#">Sign Out</a></li>
         </ul>
     </nav>

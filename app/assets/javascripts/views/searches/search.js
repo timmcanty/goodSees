@@ -2,6 +2,7 @@ GoodSees.Views.Search = Backbone.View.extend({
 
 
   initialize: function (options) {
+    this.$el.addClass('search-page');
     this.searchResults = new GoodSees.Collections.SearchResults();
     if (options.search) {
       this.searchFor(options.search);
@@ -53,15 +54,6 @@ GoodSees.Views.Search = Backbone.View.extend({
     this.searchResults._query = query;
     this.searchResults.fetch({
       data: {query: query}
-    });
-  },
-
-  nextPage: function (event) {
-    this.searchResults.fetch({
-      data: {
-        query: this.searchResults._query,
-        page: (this.searchResults._page || 1) + 1
-      }
     });
   }
 

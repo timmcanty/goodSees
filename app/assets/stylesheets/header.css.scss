@@ -41,3 +41,12 @@ ul.nav-bar-left input {
 ul.nav-bar-left input:focus {
   background: white;
 }
+
+ul.nav-bar-right div.badge {
+  background-color: black;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 9px;
+}

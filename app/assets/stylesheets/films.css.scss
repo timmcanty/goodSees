@@ -4,7 +4,11 @@
 
 
 div.films-index-body {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  padding-left: 20px;
   margin: auto;
-  width: 900px;
+  width: 880px;
   display: block;
 }

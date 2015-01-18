@@ -32,6 +32,12 @@ class Api::SessionsController < ApplicationController
     redirect_to root_url
   end
 
+  def demo
+    user = User.find_by(username: 'GoodSeesDemo')
+    login_user!(user)
+    redirect_to root_url
+  end
+
   protected
 
   def auth_hash

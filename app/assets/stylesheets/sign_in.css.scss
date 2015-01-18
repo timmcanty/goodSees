@@ -20,7 +20,7 @@ section.sign-in form {
   border: 1px solid black;
 }
 
-section.sign-in form a {
+section.sign-in form a.twitter {
   text-align: center;
   padding: 5px;
   border-radius: 5px;
@@ -32,11 +32,11 @@ section.sign-in form a {
   margin-bottom: 20px;
 }
 
-section.sign-in form a:hover {
+section.sign-in form a.twitter:hover {
   background-color: rgb(31,164,245);
 }
 
-section.sign-in form a:active {
+section.sign-in form a.twitter:active {
   color: black;
 }
 
@@ -72,4 +72,16 @@ section.sign-in form button {
 
 section.sign-in form button:hover {
   border-color: red;
+}
+
+section.sign-in form a.demo {
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 3px;
+  border: 3px solid black;;
+  border-radius: 5px;
+  background: #00f;
+  background-color: rgb(229,224,197);
+  float: right;
 }

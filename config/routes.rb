@@ -28,4 +28,5 @@ Rails.application.routes.draw do
   end
 
   get "auth/:provider/callback" => "api/sessions#omniauth"
+  get "auth/demo" => "api/sessions#demo"
 end

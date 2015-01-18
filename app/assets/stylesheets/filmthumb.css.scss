@@ -1,10 +1,15 @@
-.film-thumb-show {
+ul.films-list {
+  margin-bottom: 40px;
+}
+
+li.film-thumb-show {
+  position: relative;
   border: 1px solid black;
   display: block;
   float: left;
   width: 100px;
-  height: 210px;
-  margin: 5px;
+  height: 160px;
+  margin: 20px 5px;
 }
 
 .film-thumb-show img.thumb-poster {
@@ -19,6 +24,26 @@
   display: hidden;
 }
 
-.film-thumb-show button {
-  margin: auto;
+.film-thumb-show button.want-to {
+  border: 1px solid black;
+  font-size: 12px;
+  text-align: center;
+  padding: 5px;
+  color: black;
+  width: 90px;
+  background-color: rgb(233,233,217);
+  display: block;
+  position: absolute;
+  bottom: -25px;
+  left: -1px;
+}
+
+.film-thumb-show button.want-to:hover {
+  background-color: rgb(245,245,229);
+}
+
+.film-thumb-show div {
+  display: block;
+  position: absolute;
+  bottom: 0px;
 }

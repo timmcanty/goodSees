@@ -1,9 +1,11 @@
+
+
 #main-content > div > ul.user-feed {
   margin: auto;
   width: 900px;
   border-left: 1px solid black;
   border-right: 1px solid black;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid black;
 }
 
 ul.user-feed > h1 {
@@ -33,7 +35,7 @@ ul.user-feed  img {
   float: right;
   display:block;
   height: 120px;
-  width: 100px;
+  width: 80px;
   border: 2px solid #ccc;
 }
 

@@ -28,8 +28,16 @@ section.sign-in form a {
   color: white;
   display: block;
   width: 151px;
-  background-color: rgb(23,156,237);
+  background-color: rgb(15,148,229);
   margin-bottom: 20px;
+}
+
+section.sign-in form a:hover {
+  background-color: rgb(31,164,245);
+}
+
+section.sign-in form a:active {
+  color: black;
 }
 
 section.sign-in form label {
@@ -60,4 +68,8 @@ section.sign-in form button {
   border-radius: 5px;
   background: #00f;
   background-color: rgb(229,224,197);
+}
+
+section.sign-in form button:hover {
+  border-color: red;
 }

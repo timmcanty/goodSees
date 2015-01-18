@@ -1,15 +1,6 @@
 section.sign-in {
-  padding: 20px;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
-}
-
-section.sign-in h1 {
-  display: block;
-  font-size: 40px;
-  text-align: center;
-  margin-bottom: 25px;
+  border: 3px solid black;
+  background: white;
 }
 
 section.sign-in form {

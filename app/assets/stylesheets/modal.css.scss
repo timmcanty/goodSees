@@ -1,0 +1,16 @@
+section.modal {
+  display: block;
+  position: fixed;
+  z-index: 1px;
+  left: 300px;
+  top: 300px;
+  opacity: 0
+}
+
+section.inactive-modal {
+  opacity: 0;
+}
+
+section.active-modal {
+  opacity: 1;
+}

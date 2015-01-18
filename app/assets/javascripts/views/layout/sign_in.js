@@ -21,23 +21,29 @@ GoodSees.Views.SignIn = Backbone.View.extend({
   },
 
   submit: function (event) {
+    var view = this;
     event.preventDefault();
     var $form = $(event.currentTarget);
     var formData = $form.serializeJSON().user;
     GoodSees.currentUser.signIn({
       username: formData.username,
       password: formData.password,
+      success: function () {
+        $('#modal').switchClass('active-modal','inactive-modal',400,'swing', function () {
+          view.$el.remove();
+        });
+      },
       error: function () {
         alert('Invalid login. Please try again!')
       }
     });
+
   },
 
   signInCallback: function (event) {
     if (this.callback) {
       this.callback();
     } else {
-      Backbone.history.navigate("", {trigger: true});
     }
   }
 });

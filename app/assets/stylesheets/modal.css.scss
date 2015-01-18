@@ -1,14 +1,16 @@
 section.modal {
-  display: block;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,.5);
   position: fixed;
-  z-index: 1px;
-  left: 300px;
-  top: 300px;
-  opacity: 0
+  z-index: 1;
 }
+
 
 section.inactive-modal {
   opacity: 0;
+  z-index: -1;
 }
 
 section.active-modal {

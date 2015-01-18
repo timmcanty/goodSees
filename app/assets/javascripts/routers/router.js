@@ -20,8 +20,8 @@ GoodSees.Routers.Router = Backbone.Router.extend({
   },
 
   showCurrentUsersFeed: function () {
-    var callback = this.showCurrentUsersFeed.bind(this);
-    if (!this._requireSignedIn(callback)) { return; }
+    // var callback = this.showCurrentUsersFeed.bind(this);
+    if (!this._requireSignedIn()) { return; }
 
     var feed = new GoodSees.Collections.Activities([], {user: GoodSees.currentUser});
     feed.fetch();
@@ -53,8 +53,8 @@ GoodSees.Routers.Router = Backbone.Router.extend({
   },
 
   showCurrentUsersFilms: function () {
-    var callback = this.showCurrentUsersFilms.bind(this);
-    if (!this._requireSignedIn(callback)) { return; }
+    // var callback = this.showCurrentUsersFilms.bind(this);
+    if (!this._requireSignedIn()) { return; }
 
     GoodSees.currentUser.fetch();
     var userShow = new GoodSees.Views.UserShow({ model: GoodSees.currentUser});
@@ -69,8 +69,8 @@ GoodSees.Routers.Router = Backbone.Router.extend({
   },
 
   usersIndex: function () {
-    var callback = this.usersIndex.bind(this);
-    if (!this._requireSignedIn(callback)) { return; }
+    // var callback = this.usersIndex.bind(this);
+    if (!this._requireSignedIn()) { return; }
 
     var users = new GoodSees.Collections.Users();
     users.fetch();

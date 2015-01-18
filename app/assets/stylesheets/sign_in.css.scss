@@ -1,9 +1,12 @@
 section.sign-in {
-  border: 3px solid black;
-  background: white;
+  margin: auto;
+  display: block;
+  margin-top: 300px;
+  background: transparent;
 }
 
 section.sign-in form {
+  top: 300px;
   margin: auto;
   width: 500px;
   padding: 15px 80px;

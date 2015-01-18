@@ -1,8 +1,11 @@
 GoodSees.Views.UsersCreate = Backbone.View.extend({
 
   initialize: function (options) {
+    this.$el.addClass('users-create');
     this.listenTo(this.model, "sync change", this.render);
   },
+
+  tagName: 'section',
 
   template: JST['users/create'],
 

@@ -14,7 +14,6 @@ GoodSees.Views.FilmThumbShow = Backbone.View.extend({
   template: JST['films/thumb'],
 
   render: function () {
-    console.log(this.$el);
     this.$el.addClass('film-thumb-show group')
     var view = this;
     var content = this.template({film: this.model, rating: this.model.userRating()});

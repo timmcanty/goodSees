@@ -15,7 +15,6 @@ GoodSees.Views.FilmInfo = Backbone.View.extend({
   template: JST['films/info'],
 
   render: function () {
-    console.log(this.model)
     var view = this;
     var content = this.template({film: this.model});
     this.$el.html(content);

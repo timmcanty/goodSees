@@ -9,18 +9,32 @@ GoodSees.Views.SignIn = Backbone.View.extend({
   tagName: 'section',
 
   events: {
-    "submit form" : "submit"
+    "submit form.sign-in" : "submitSignIn",
+    "click a.cancel" : 'closeModal',
+    'click a.sign-up' : 'signUp',
+    "click a.sign-in" : 'render',
+    'submit form.sign-up' : 'submitSignUp'
   },
 
   template: JST['layouts/sign_in'],
+  signUpTemplate: JST['users/create'],
 
-  render: function () {
-    this.$el.html(this.template());
-
+  render: function (event) {
+    if (event) { event.preventDefault()};
+    console.log('render')
+    var view = this;
+    this.$el.hide('fade',{},400,function () {
+      console.log('hiding')
+      view.$el.empty();
+      view.$el.html(view.template);
+      view.$el.show();
+      console.log('showing')
+    });
+    console.log('return')
     return this;
   },
 
-  submit: function (event) {
+  submitSignIn: function (event) {
     var view = this;
     event.preventDefault();
     var $form = $(event.currentTarget);
@@ -45,5 +59,44 @@ GoodSees.Views.SignIn = Backbone.View.extend({
       this.callback();
     } else {
     }
+  },
+
+  closeModal: function (event) {
+    event.preventDefault();
+    this.$el.remove();
+    $('#modal').switchClass('active-modal','inactive-modal');
+  },
+
+  signUp: function (event) {
+    var view = this;
+    event.preventDefault();
+    var user = new GoodSees.Models.User
+    this.$el.hide('fade',{},400,function () {
+      view.$el.empty();
+      view.$el.html(view.signUpTemplate({user: user}));
+      view.$el.show();
+    });
+
+    return this;
+  },
+
+  submitSignUp: function (event) {
+    event.preventDefault();
+
+    var $form = $(event.currentTarget);
+    var userData = $form.serializeJSON().user;
+    var that = this;
+    var user = new GoodSees.Models.User();
+    user.set(userData);
+    user.save({}, {
+      success: function () {
+        GoodSees.currentUser.fetch();
+        Backbone.history.navigate("", {trigger: true});
+      },
+      error: function (data) {
+        alert("Invalid username and or password");
+        view.$el.html(view.signUpTemplate({user: user}));
+      }
+    });
   }
 });

@@ -1,8 +1,15 @@
 section.sign-in {
   margin: auto;
   display: block;
-  margin-top: 300px;
+  margin-top: 150px;
   background: transparent;
+}
+
+section.sign-in h1 {
+  display: block;
+  font-size: 24px;
+  margin: auto;
+  text-align: center;
 }
 
 section.sign-in form {
@@ -12,6 +19,7 @@ section.sign-in form {
   padding: 15px 80px;
   background-color: rgb(239,239,223);
   border: 1px solid black;
+  border-radius: 5px;
 }
 
 section.sign-in form a.twitter {

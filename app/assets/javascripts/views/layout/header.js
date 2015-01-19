@@ -25,7 +25,6 @@ GoodSees.Views.Header = Backbone.View.extend({
     event.preventDefault();
     GoodSees.currentUser.signOut({
       success:function () {
-        Backbone.history.navigate("/films", {trigger: true});
         Backbone.history.navigate("/session/new", {trigger: true});
       }
     });

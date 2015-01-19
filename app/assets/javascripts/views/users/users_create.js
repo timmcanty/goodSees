@@ -26,8 +26,9 @@ GoodSees.Views.UsersCreate = Backbone.View.extend({
     var $form = $(event.currentTarget);
     var userData = $form.serializeJSON().user;
     var that = this;
-    this.model.set(userData);
-    this.model.save({}, {
+    var user = new GoodSees.Models.User()
+    user.set(userData);
+    user.save({}, {
       success: function () {
         GoodSees.currentUser.fetch();
         that.collection.add(that.model, {merge: true});

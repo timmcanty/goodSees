@@ -10,7 +10,6 @@ GoodSees.Routers.Router = Backbone.Router.extend({
     '' : 'showCurrentUsersFeed',
     'films' : 'filmsIndex',
     'films/:id' : 'filmShow',
-    'users/new' : 'newUser',
     'users' : 'usersIndex',
     'users/films/:id' : 'showUserFilms',
     'users/:id' : 'showUserProfile',

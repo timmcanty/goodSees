@@ -10,12 +10,14 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
     this._searchQuery = '';
     this._page = 1;
     this.listenTo(this.collection, "sync", this.render);
+    this.listenTo(GoodSees.currentUser, 'signIn signOut', this.refresh);
     this.$el.addClass('films-index-body')
   },
 
   template: JST['films/index'],
 
   render: function () {
+    console.log('render')
     var content = this.template({
       films: this.collection,
       page: this._page,
@@ -26,6 +28,16 @@ GoodSees.Views.FilmIndex = Backbone.CompositeView.extend({
     this.renderFilms();
 
     return this;
+  },
+
+  refresh: function () {
+    var view = this;
+    this.$el.hide();
+    this.collection.fetch({
+      success: function () {
+        view.$el.show('blind');
+      }
+    });
   },
 
   renderFilms: function () {

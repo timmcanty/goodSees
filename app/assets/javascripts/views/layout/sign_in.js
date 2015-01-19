@@ -21,16 +21,12 @@ GoodSees.Views.SignIn = Backbone.View.extend({
 
   render: function (event) {
     if (event) { event.preventDefault()};
-    console.log('render')
     var view = this;
     this.$el.hide('fade',{},400,function () {
-      console.log('hiding')
       view.$el.empty();
       view.$el.html(view.template);
       view.$el.show();
-      console.log('showing')
     });
-    console.log('return')
     return this;
   },
 

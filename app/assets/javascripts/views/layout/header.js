@@ -23,10 +23,6 @@ GoodSees.Views.Header = Backbone.View.extend({
 
   logOut: function (event) {
     event.preventDefault();
-    GoodSees.currentUser.signOut({
-      success:function () {
-        Backbone.history.navigate("/session/new", {trigger: true});
-      }
-    });
+    GoodSees.currentUser.signOut({});
   }
 });

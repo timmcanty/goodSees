@@ -8,6 +8,7 @@ GoodSees.Views.UserIndex = Backbone.CompositeView.extend({
   initialize: function () {
     this.$el.addClass('users-index');
     this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(GoodSees.currentUser, 'signin signOut', this.render);
   },
 
   tagName: 'section',

@@ -4,7 +4,6 @@ section.modal {
   width: 100%;
   background-color: rgba(0,0,0,.5);
   position: fixed;
-  z-index: 1;
 }
 
 
@@ -15,4 +14,5 @@ section.inactive-modal {
 
 section.active-modal {
   opacity: 1;
+  z-index: 200;
 }

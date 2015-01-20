@@ -2,7 +2,6 @@ GoodSees.Views.SignIn = Backbone.View.extend({
 
   initialize: function (options) {
     this.$el.addClass('sign-in');
-    this.callback = options.callback;
     this.listenTo(GoodSees.currentUser, "signIn", this.signInCallback);
   },
 
@@ -87,7 +86,6 @@ GoodSees.Views.SignIn = Backbone.View.extend({
     user.save({}, {
       success: function () {
         GoodSees.currentUser.fetch();
-        Backbone.history.navigate("", {trigger: true});
       },
       error: function (data) {
         alert("Invalid username and or password");

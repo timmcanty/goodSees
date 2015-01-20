@@ -6,7 +6,9 @@ GoodSees.Views.Header = Backbone.View.extend({
 
   events: {
     'click #header-submit' : 'search',
-    'click a.sign-out' : 'logOut'
+    'click a.sign-out' : 'logOut',
+    'click a.sign-in' : 'signIn',
+    'click a.not-signed-in' : 'requireSignedIn'
   },
   template: JST['layouts/header'],
 
@@ -24,5 +26,15 @@ GoodSees.Views.Header = Backbone.View.extend({
   logOut: function (event) {
     event.preventDefault();
     GoodSees.currentUser.signOut({});
+  },
+
+  signIn: function (event) {
+    event.preventDefault();
+    Backbone.trigger('signIn');
+  },
+
+  requireSignedIn: function (event) {
+    event.preventDefault();
+    Backbone.trigger('signIn');
   }
 });

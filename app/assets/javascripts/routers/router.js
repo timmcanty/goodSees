@@ -14,8 +14,6 @@ GoodSees.Routers.Router = Backbone.Router.extend({
     'users/films/:id' : 'showUserFilms',
     'users/:id' : 'showUserProfile',
     'search/:string' : 'searchSite',
-    'session/new' : 'signIn'
-
   },
 
   showCurrentUsersFeed: function () {
@@ -95,12 +93,7 @@ GoodSees.Routers.Router = Backbone.Router.extend({
 
   signIn: function (callback) {
     if (!this._requireSignedOut(callback)) {return;}
-
-    var signInView = new GoodSees.Views.SignIn({
-      callback: callback
-    });
-    $('#modal').html(signInView.render().el);
-    $('#modal').switchClass('inactive-modal','active-modal');
+    Backbone.trigger('signIn');
   },
 
   _requireSignedIn: function(callback) {
@@ -130,8 +123,6 @@ GoodSees.Routers.Router = Backbone.Router.extend({
   _swapView: function (view) {
     var router = this;
     GoodSees.currentUser.fetch();
-    $('#modal').switchClass('active-modal','inactive-modal');
-    $('#modal').children().remove();
     this.$rootEl.toggle('fade',{},400, function () {
       router._currentView && router._currentView.remove();
       router._currentView = view;

@@ -2,10 +2,6 @@ GoodSees.Models.CurrentUser = GoodSees.Models.User.extend({
 
   url: "/api/session",
 
-  initialize: function(options){
-    this.listenTo(this, "change", this.fireSessionEvent);
-  },
-
   isSignedIn: function() {
     return !this.isNew();
   },
@@ -16,14 +12,16 @@ GoodSees.Models.CurrentUser = GoodSees.Models.User.extend({
       "user[username]": options.username,
       "user[password]": options.password
     };
-
+    console.log(this.attributes)
     $.ajax({
       url: this.url,
       type: "POST",
       data: credentials,
       dataType: "json",
       success: function(data){
+        console.log(data);
         model.set(data);
+        model.trigger("signIn");
         options.success && options.success();
       },
       error: function(){
@@ -41,17 +39,10 @@ GoodSees.Models.CurrentUser = GoodSees.Models.User.extend({
       dataType: "json",
       success: function(data){
         model.clear();
+        model.trigger("signOut");
         options.success && options.success();
       }
     });
   },
-
-  fireSessionEvent: function(){
-    if(this.isSignedIn()){
-      this.trigger("signIn");
-    } else {
-      this.trigger("signOut");
-    }
-  }
 
 });

@@ -8,7 +8,8 @@ GoodSees.Views.UserIndex = Backbone.CompositeView.extend({
   initialize: function () {
     this.$el.addClass('users-index');
     this.listenTo(this.collection, 'sync', this.render);
-    this.listenTo(GoodSees.currentUser, 'signin signOut', this.render);
+    this.listenTo(GoodSees.currentUser, 'signIn', this.render);
+    this.listenTo(GoodSees.currentUser, 'signOut', this.logOut);
   },
 
   tagName: 'section',
@@ -19,6 +20,11 @@ GoodSees.Views.UserIndex = Backbone.CompositeView.extend({
   render: function () {
     var content = this.template({users: this.collection});
     this.$el.html(content);
+    return this;
+  },
+
+  logOut: function () {
+    this.$el.html('');
     return this;
   },
 

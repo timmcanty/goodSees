@@ -11,13 +11,14 @@ GoodSees.Views.Search = Backbone.View.extend({
   },
 
   events: {
-    "click .search": "search",
-    "click .next-page": "nextPage"
+    "click .search": "search"
   },
 
   template: JST["layouts/search"],
 
   render: function () {
+    console.log('render')
+    console.log(this.searchResults);
     var content = this.template({collection: this.searchResults});
     this.$el.html(content);
 
@@ -27,15 +28,15 @@ GoodSees.Views.Search = Backbone.View.extend({
   },
 
   renderSearchResults: function () {
-
+    var view = this;
     this.searchResults.each(function (model) {
       var template;
       if (model.escape('username')) {
-        var container = this.$(".user-results");
+        var container = view.$(".user-results");
         template = JST["users/search_item"];
         container.append(template({model: model}));
       } else {
-        var container = this.$('.film-results');
+        var container = view.$('.film-results');
         template = JST["films/search_item"];
         container.append(template({model: model}));
       }
@@ -45,13 +46,16 @@ GoodSees.Views.Search = Backbone.View.extend({
   search: function (event) {
     event.preventDefault();
     this.searchResults._query = this.$(".query").val();
+    Backbone.history.navigate('search/' + this.searchResults._query);
     this.searchResults.fetch({
       data: {query: this.searchResults._query}
     });
   },
 
   searchFor: function (query) {
+    console.log('searchFor')
     this.searchResults._query = query;
+    console.log(query)
     this.searchResults.fetch({
       data: {query: query}
     });

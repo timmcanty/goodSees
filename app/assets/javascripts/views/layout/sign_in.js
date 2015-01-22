@@ -1,7 +1,6 @@
 GoodSees.Views.SignIn = Backbone.View.extend({
 
   initialize: function (options) {
-    console.log('makes sign in')
     this.callback = options.callback;
     this.$el.addClass('sign-in');
     this.listenTo(GoodSees.currentUser, "signIn", this.signInCallback);
@@ -22,7 +21,6 @@ GoodSees.Views.SignIn = Backbone.View.extend({
   signUpTemplate: JST['users/create'],
 
   render: function (event) {
-    console.log('sign_in render');
     if (event) { event.preventDefault()};
     var view = this;
     this.$el.hide('fade',{},400,function () {
@@ -34,7 +32,6 @@ GoodSees.Views.SignIn = Backbone.View.extend({
   },
 
   submitSignIn: function (event) {
-    console.log('submitSignIn')
     var view = this;
     event.preventDefault();
     var $form = $(event.currentTarget);
@@ -57,8 +54,19 @@ GoodSees.Views.SignIn = Backbone.View.extend({
   createDemoUser: function (event) {
     var view = this;
     event.preventDefault();
-    GoodSees.currentUser.fetch({url: 'auth/demo'
-      });
+    GoodSees.currentUser.fetch({
+      url: 'auth/demo',
+      success: function () {
+        GoodSees.currentUser.signIn({
+          username: GoodSees.currentUser.get('username'),
+          password: 'funtime',
+          success: function () {
+            $('#modal').switchClass('active-modal','inactive-modal',400,'swing', function () {
+              view.$el.remove();
+          });}
+        });
+    }
+    });
   },
 
   destroy: function () {
@@ -69,11 +77,10 @@ GoodSees.Views.SignIn = Backbone.View.extend({
   },
 
   signInCallback: function (event) {
+    console.log('sic')
     if (this.callback) {
-      console.log('signIn callback')
       this.callback();
     } else {
-      console.log('signIn no callback')
       Backbone.history.navigate('signing-in');
       Backbone.history.navigate('', {trigger: true});
     }

@@ -17,7 +17,6 @@ GoodSees.Routers.Router = Backbone.Router.extend({
   },
 
   showCurrentUsersFeed: function () {
-    console.log('showCurrentUsersFeed')
     var callback = this.showCurrentUsersFeed.bind(this);
     if (!this._requireSignedIn(callback)) { return; }
 
@@ -29,7 +28,6 @@ GoodSees.Routers.Router = Backbone.Router.extend({
 
 
   filmsIndex: function () {
-    console.log('filmsIndex');
     var films = new GoodSees.Collections.Films([], {user: GoodSees.currentUser || null});
     films.fetch();
     var filmsIndexShow = new GoodSees.Views.FilmIndex({collection: films});
@@ -37,7 +35,6 @@ GoodSees.Routers.Router = Backbone.Router.extend({
   },
 
   filmShow: function (id) {
-    console.log('filmShow');
     var film = new GoodSees.Models.Film({id: id, user: GoodSees.currentUser || null});
     film.fetch();
     var filmShow = new GoodSees.Views.FilmInfo({model: film});
@@ -94,19 +91,16 @@ GoodSees.Routers.Router = Backbone.Router.extend({
   },
 
   signIn: function (callback) {
-    console.log('signIn')
     if (!this._requireSignedOut(callback)) {return;}
     GoodSees.vent.trigger('signIn', callback);
   },
 
   _requireSignedIn: function(callback) {
-    console.log('_requireSignedIn')
     if (!GoodSees.currentUser.isSignedIn()) {
       callback = callback || this._goHome.bind(this);
       this.signIn(callback);
       return false;
     }
-    console.log('was signed in')
     return true;
   },
 

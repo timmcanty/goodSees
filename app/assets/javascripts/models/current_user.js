@@ -12,14 +12,12 @@ GoodSees.Models.CurrentUser = GoodSees.Models.User.extend({
       "user[username]": options.username,
       "user[password]": options.password
     };
-    console.log(this.attributes)
     $.ajax({
       url: this.url,
       type: "POST",
       data: credentials,
       dataType: "json",
       success: function(data){
-        console.log(data);
         model.set(data);
         model.trigger("signIn");
         options.success && options.success();

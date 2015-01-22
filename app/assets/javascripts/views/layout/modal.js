@@ -1,7 +1,6 @@
 GoodSees.Views.Modal = Backbone.CompositeView.extend({
 
   initialize: function (options) {
-    console.log('modal made')
     this.$el = options.$el;
     this.active = false;
     this.listenTo(GoodSees.vent, "signIn", this.renderSignIn);
@@ -19,7 +18,6 @@ GoodSees.Views.Modal = Backbone.CompositeView.extend({
   signInTemplate: JST['layouts/sign_in'],
 
   renderSignIn: function (callback) {
-    console.log('modal#renderSignIn');
     this.view && this.view.destroy();
     var signIn = new GoodSees.Views.SignIn({callback: callback});
     this.view = signIn;
@@ -29,7 +27,6 @@ GoodSees.Views.Modal = Backbone.CompositeView.extend({
   },
 
   show: function () {
-    console.log('show');
     this.active = true
     this.$el.switchClass('inactive-modal', 'active-modal');
   },

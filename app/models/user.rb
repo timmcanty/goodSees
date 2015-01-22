@@ -121,7 +121,7 @@ class User < ActiveRecord::Base
         created_at: Faker::Time.between(2.days.ago, Time.now)
       )
 
-      friend1.activities.create!(
+      friend1.activities.find_or_create_by(
       mentionable_id: film.id,
       mentionable_type: 'Film',
       message: 'has reviewed',

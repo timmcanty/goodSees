@@ -111,14 +111,21 @@ class User < ActiveRecord::Base
         mentionable_id: film.id,
         mentionable_type: 'Film',
         message: 'has reviewed',
-        created_at: Faker::Time.between(2.days.ago, Time.now, :evening)
+        created_at: Faker::Time.between(2.days.ago, Time.now)
       )
 
       friend1.activities.create!(
         mentionable_id: demo_user.id,
         mentionable_type: 'User',
         message: 'is now friends with',
-        created_at: Faker::Time.between(2.days.ago, Time.now, :evening)
+        created_at: Faker::Time.between(2.days.ago, Time.now)
+      )
+
+      friend1.activities.create!(
+      mentionable_id: film.id,
+      mentionable_type: 'Film',
+      message: 'has reviewed',
+      created_at: Faker::Time.between(5.days.ago, Time.now)
       )
 
       demo_user
@@ -176,7 +183,7 @@ class User < ActiveRecord::Base
   end
 
   def feed_activities(num)
-    Activity.where(user_id: self.friends.ids << self.id).includes(:user, :mentionable).order(created_at: :desc).limit(num)
+    Activity.where(user_id: self.friends.ids << self.id).includes(:user, :mentionable).order('activities.created_at DESC').limit(num)
   end
 
 

@@ -32,7 +32,6 @@ GoodSees.Views.UsersCreate = Backbone.View.extend({
       success: function () {
         GoodSees.currentUser.fetch();
         that.collection.add(that.model, {merge: true});
-        Backbone.history.navigate("", {trigger: true});
       },
       error: function (data) {
         alert("Invalid username and or password");

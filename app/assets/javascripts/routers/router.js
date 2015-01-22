@@ -17,6 +17,7 @@ GoodSees.Routers.Router = Backbone.Router.extend({
   },
 
   showCurrentUsersFeed: function () {
+    console.log('callback is happening!')
     var callback = this.showCurrentUsersFeed.bind(this);
     if (!this._requireSignedIn(callback)) { return; }
 
@@ -93,10 +94,12 @@ GoodSees.Routers.Router = Backbone.Router.extend({
 
   signIn: function (callback) {
     if (!this._requireSignedOut(callback)) {return;}
-    Backbone.trigger('signIn');
+    GoodSees.vent.trigger('signIn', callback);
   },
 
   _requireSignedIn: function(callback) {
+    console.log('_requireSignedIn');
+    console.log(!GoodSees.currentUser.isSignedIn());
     if (!GoodSees.currentUser.isSignedIn()) {
       callback = callback || this._goHome.bind(this);
       this.signIn(callback);

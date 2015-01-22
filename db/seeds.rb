@@ -14,7 +14,7 @@ Film.create(title: 'Guardians of the Galaxy',
   image: 'http://ia.media-imdb.com/images/M/MV5BMTAwMjU5OTgxNjZeQTJeQWpwZ15BbWU4MDUxNDYxODEx._V1_SX300.jpg'
 )
 
-Film.create(title: 'The Muppets',
+muppets = Film.create(title: 'The Muppets',
   imdb_url: 'http://www.imdb.com/title/tt1204342/',
   description: 'A Muppet fanatic with some help from his two human
     compatriots must regroup the Muppet gang to stop a avaricious oil mogul from
@@ -45,7 +45,7 @@ Film.create(title: 'The Good, the Bad and the Ugly',
   image: 'http://ia.media-imdb.com/images/M/MV5BOTQ5NDI3MTI4MF5BMl5BanBnXkFtZTgwNDQ4ODE5MDE@._V1_SX300.jpg'
 )
 
-User.create(
+dusty = User.create(
   username: 'Dusty',
   name: 'Dusty',
   location: Faker::Address.city + ', ' + Faker::Address.state,
@@ -84,4 +84,11 @@ User.create(
   password: SecureRandom.urlsafe_base64(16),
   email: 'torrey@email.com',
   image: 'https://lh4.googleusercontent.com/-XtZnZwJUWMk/AAAAAAAAAAI/AAAAAAAAABI/RbZOBUySnB8/photo.jpg'
+)
+
+dusty.ratings.create(
+  film_id: muppets.id,
+  star_rating: 4,
+  review: Faker::Lorem.paragraph(2),
+  view_date: Faker::Date.backward(14),
 )

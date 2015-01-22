@@ -1,6 +1,7 @@
 GoodSees.Views.SignIn = Backbone.View.extend({
 
   initialize: function (options) {
+    this.callback = options.callback;
     this.$el.addClass('sign-in');
     this.listenTo(GoodSees.currentUser, "signIn", this.signInCallback);
   },
@@ -12,13 +13,15 @@ GoodSees.Views.SignIn = Backbone.View.extend({
     "click a.cancel" : 'closeModal',
     'click a.sign-up' : 'signUp',
     "click a.sign-in" : 'render',
-    'submit form.sign-up' : 'submitSignUp'
+    'submit form.sign-up' : 'submitSignUp',
+    'click a.demo' : 'createDemoUser'
   },
 
   template: JST['layouts/sign_in'],
   signUpTemplate: JST['users/create'],
 
   render: function (event) {
+    console.log('render signIn')
     if (event) { event.preventDefault()};
     var view = this;
     this.$el.hide('fade',{},400,function () {
@@ -40,6 +43,7 @@ GoodSees.Views.SignIn = Backbone.View.extend({
       success: function () {
         $('#modal').switchClass('active-modal','inactive-modal',400,'swing', function () {
           view.$el.remove();
+          console.log('submitSignIn success')
         });
       },
       error: function () {
@@ -49,7 +53,17 @@ GoodSees.Views.SignIn = Backbone.View.extend({
 
   },
 
+  createDemoUser: function (event) {
+    var view = this;
+    event.preventDefault();
+    GoodSees.currentUser.fetch({url: 'auth/demo',
+      success: function () {
+        view.signInCallback();
+      }});
+  },
+
   signInCallback: function (event) {
+    console.log('signInCallback')
     if (this.callback) {
       this.callback();
     } else {
@@ -86,6 +100,7 @@ GoodSees.Views.SignIn = Backbone.View.extend({
     user.save({}, {
       success: function () {
         GoodSees.currentUser.fetch();
+        Backbone.trigger('hideModal');
       },
       error: function (data) {
         alert("Invalid username and or password");

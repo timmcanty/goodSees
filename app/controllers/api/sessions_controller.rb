@@ -17,7 +17,7 @@ class Api::SessionsController < ApplicationController
       render json: params , status: :unprocessable_entity
     else
       login_user!(user)
-      render :show
+      render json: user
     end
   end
 
@@ -27,15 +27,15 @@ class Api::SessionsController < ApplicationController
   end
 
   def omniauth
-    user = User.find_or_create_by_auth_hash(auth_hash)
-    login_user!(user)
-    redirect_to root_url
+    @user = User.find_or_create_by_auth_hash(auth_hash)
+    login_user!(@user)
+    render 'api/users/show'
   end
 
   def demo
-    user = User.find_by(username: 'GoodSeesDemo')
-    login_user!(user)
-    redirect_to root_url
+    @user = User.create_demo_user
+    login_user!(@user)
+    render 'api/users/show'
   end
 
   protected

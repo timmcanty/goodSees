@@ -111,22 +111,21 @@ class User < ActiveRecord::Base
         mentionable_id: film.id,
         mentionable_type: 'Film',
         message: 'has reviewed',
-        created_at: Faker::Time.between(2.days.ago, Time.now)
+        created_at: 1.days.ago
       )
 
       friend1.activities.create!(
         mentionable_id: demo_user.id,
         mentionable_type: 'User',
         message: 'is now friends with',
-        created_at: Faker::Time.between(2.days.ago, Time.now)
+        created_at: 5.minutes.ago
       )
 
-      friend1.activities.find_or_create_by(
-      mentionable_id: film.id,
-      mentionable_type: 'Film',
-      message: 'has reviewed',
-      created_at: Faker::Time.between(5.days.ago, Time.now)
-      )
+      friend1.activities
+        .where(message: 'has reviewed')
+        .where(mentionable_id: film.id)
+        .where(mentionable_type: 'Film')
+        .first_or_create!
 
       demo_user
     end

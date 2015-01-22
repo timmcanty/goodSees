@@ -3,8 +3,10 @@ class User < ActiveRecord::Base
   acts_as_reader
   multisearchable against: [:username,:name,:location,:bio,:email]
   attr_reader :password
+  attr_accessor :created_at
 
   has_attached_file :image, default_url: "missing-user.png"
+
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   validates :username, :email,  presence: true, uniqueness: true
   validates :password_digest, presence: true
@@ -58,6 +60,69 @@ class User < ActiveRecord::Base
     end
 
     user
+  end
+
+  def self.create_demo_user
+    ActiveRecord::Base.transaction do
+      demo_user = User.create!(
+        username: 'demouser' + SecureRandom.urlsafe_base64(3),
+        name: Faker::Name.name,
+        location: Faker::Address.city + ', ' + Faker::Address.state,
+        bio: Faker::Lorem.paragraph(3),
+        password: 'funtime',
+        email: Faker::Internet.email,
+        image: 'http://d1oq12oz7mp8bh.cloudfront.net/wp-content/uploads/2012/10/DemoIconLarge-green.jpg'
+      )
+
+      demo_user.reels.create!(
+        name: 'My first custom reel',
+        custom: true
+      )
+
+      film = Film.find_by( title: 'The Muppets')
+
+      demo_user.ratings.create!(
+        film_id: film.id,
+        star_rating: 5,
+        view_date: Faker::Date.backward(14),
+        review: Faker::Lorem.paragraph(2),
+      )
+
+      friend1 = User.find_by(username: 'Dusty')
+      friend2 = User.find_by(username: 'Camren')
+      friend3 = User.find_by(username: 'Kallie')
+      friend4 = User.find_by(username: 'Torrey')
+
+      request = demo_user.friendables.create!(
+        friend_id: friend1.id
+      )
+
+      request.accept
+
+      friend2.friendables.create!(
+        friend_id: demo_user.id
+      )
+
+      demo_user.friendables.create!(
+        friend_id: friend3.id
+      )
+
+      demo_user.activities.create!(
+        mentionable_id: film.id,
+        mentionable_type: 'Film',
+        message: 'has reviewed',
+        created_at: Faker::Time.between(2.days.ago, Time.now, :evening)
+      )
+
+      friend1.activities.create!(
+        mentionable_id: demo_user.id,
+        mentionable_type: 'User',
+        message: 'is now friends with',
+        created_at: Faker::Time.between(2.days.ago, Time.now, :evening)
+      )
+
+      demo_user
+    end
   end
 
   def is_password?(password)

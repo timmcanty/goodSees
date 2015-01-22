@@ -34,6 +34,7 @@ gem 'paperclip'
 gem 'aws-sdk'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'faker'
 
 group :development do
   gem 'better_errors'

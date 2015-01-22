@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 20150115212842) do
     t.string   "name"
     t.string   "location"
     t.integer  "featured_id"
-    t.datetime "birth_date"
+    t.date     "birth_date"
     t.text     "bio"
     t.datetime "created_at"
     t.datetime "updated_at"

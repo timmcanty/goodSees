@@ -53,15 +53,22 @@ GoodSees.Views.SignIn = Backbone.View.extend({
 
   createDemoUser: function (event) {
     var view = this;
+    this.undelegateEvents();
+    $('form').addClass('working');
+    $('body').addClass('wait');
     event.preventDefault();
     GoodSees.currentUser.fetch({
       url: 'auth/demo',
       success: function () {
+        console.log('fetched')
         GoodSees.currentUser.signIn({
           username: GoodSees.currentUser.get('username'),
           password: 'funtime',
           success: function () {
+            $('body').removeClass('wait');
+            console.log('signed in')
             $('#modal').switchClass('active-modal','inactive-modal',400,'swing', function () {
+              console.log('ready to start')
               view.$el.remove();
           });}
         });

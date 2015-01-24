@@ -84,7 +84,16 @@ section.sign-in form a.demo {
   padding: 3px;
   border: 3px solid black;;
   border-radius: 5px;
-  background: #00f;
   background-color: rgb(229,224,197);
   float: right;
+}
+
+
+
+section.sign-in form.working {
+  display: none;
+}
+
+body.wait *, body.wait {
+  cursor:wait !important;
 }

@@ -43,6 +43,14 @@ group :development do
   gem 'quiet_assets'
 end
 
+group :development, :test do
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'guard-rspec'
+end
+
 group :production do
   gem 'rails_12factor'
 end

@@ -3,7 +3,11 @@ GoodSees.Views.FeedIndex = Backbone.View.extend({
   initialize: function (options) {
     this.listenTo(GoodSees.currentUser,'sync', this.render);
     this.listenTo(this.collection, 'sync', this.render);
-    this.listenTo(GoodSees.currentUser, 'signOut', this.removeDisplay);
+    this.listenTo(GoodSees.currentUser, 'signOut', this.render);
+  },
+
+  events: {
+    'click section.welcome a' : 'signIn'
   },
 
   template: JST['activities/index'],
@@ -14,8 +18,10 @@ GoodSees.Views.FeedIndex = Backbone.View.extend({
     return this;
   },
 
-  removeDisplay: function () {
-    this.$el.remove();
+  signIn: function (event) {
+    console.log('click')
+    event.preventDefault();
+    GoodSees.vent.trigger('signIn');
   }
 
 });

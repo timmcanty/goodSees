@@ -1,0 +1,54 @@
+section.welcome {
+  display: block;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  font-family: 'Press Start 2P', cursive;
+  padding: 20px;
+  background-image: url('movies.jpg');
+  background-size: 900px Auto;
+  height: 650px;
+}
+
+section.welcome h1 {
+  color: black;
+  margin: auto;
+  margin-top: 120px;
+  display: block;
+  font-size: 60px;
+  text-align: center;
+  background: transparent;
+}
+
+section.welcome p {
+  font-family: sans-serif;
+  display: block;
+  font-size: 30px;
+  width: 720px;
+  margin-left: 70px;
+  padding: 15px;
+  text-align: center;
+  color: #999;
+}
+
+section.welcome a {
+  display: block;
+  width: 290px;
+  margin: auto;
+  margin-top: 30px;
+  font-size: 55px;
+  font-family: sans-serif;
+  padding: 3px;
+  border-radius: 5px;
+  height: 47px;
+  background: #00f;
+  background-color: rgb(229,224,197);
+  vertical-align: center;
+  text-align: center;
+  border: 1px solid black;
+}
+
+section.welcome a:hover {
+  background-color: rgb(199,194,167);
+  border-color: green;
+}

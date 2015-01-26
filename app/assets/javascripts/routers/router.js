@@ -17,9 +17,6 @@ GoodSees.Routers.Router = Backbone.Router.extend({
   },
 
   showCurrentUsersFeed: function () {
-    var callback = this.showCurrentUsersFeed.bind(this);
-    if (!this._requireSignedIn(callback)) { return; }
-
     var feed = new GoodSees.Collections.Activities([], {user: GoodSees.currentUser});
     feed.fetch();
     var feedIndexShow = new GoodSees.Views.FeedIndex({collection: feed});

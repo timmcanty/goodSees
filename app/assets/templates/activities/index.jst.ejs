@@ -1,24 +1,36 @@
-<ul class="user-feed group">
-  <h1><%= GoodSees.currentUser.escape('username') %>'s Feed</h1>
-  <% activities.forEach( function (activity) { %>
-    <li>
-      <% if (activity.mentionable() instanceof GoodSees.Models.User) { %>
-        <section class="text-notification">
-        <a href="#users/<%= activity.user().id %>"><%= activity.user().escape('username') %></a>
-        <%= activity.get('message') %>
-        <a href="#users/<%= activity.mentionable().id %>"><%= activity.mentionable().escape('username') %></a>
-        <label class="time"><%= activity.get('created_at') %> ago.</label>
-        </section>
-        <a href="#users/<%= activity.mentionable().id%>"><img src="<%= activity.mentionable().escape('image_url') %>" alt="" /></a>
-      <% } else { %>
-        <section class="text-notification">
+<% if (GoodSees.currentUser.isSignedIn()) { %>
+
+  <ul class="user-feed group">
+    <h1><%= GoodSees.currentUser.escape('username') %>'s Feed</h1>
+    <% activities.forEach( function (activity) { %>
+      <li>
+        <% if (activity.mentionable() instanceof GoodSees.Models.User) { %>
+          <section class="text-notification">
           <a href="#users/<%= activity.user().id %>"><%= activity.user().escape('username') %></a>
           <%= activity.get('message') %>
-          <a href="#films/<%= activity.mentionable().id %>"><%= activity.mentionable().get('title') %></a>
+          <a href="#users/<%= activity.mentionable().id %>"><%= activity.mentionable().escape('username') %></a>
           <label class="time"><%= activity.get('created_at') %> ago.</label>
-        </section>
-        <a href="#films/<%= activity.mentionable().id%>"><img src="<%= activity.mentionable().escape('image_url') %>" alt="" /></a>
-      <% } %>
-    </li>
-  <% }) %>
-</ul>
+          </section>
+          <a href="#users/<%= activity.mentionable().id%>"><img src="<%= activity.mentionable().escape('image_url') %>" alt="" /></a>
+        <% } else { %>
+          <section class="text-notification">
+            <a href="#users/<%= activity.user().id %>"><%= activity.user().escape('username') %></a>
+            <%= activity.get('message') %>
+            <a href="#films/<%= activity.mentionable().id %>"><%= activity.mentionable().get('title') %></a>
+            <label class="time"><%= activity.get('created_at') %> ago.</label>
+          </section>
+          <a href="#films/<%= activity.mentionable().id%>"><img src="<%= activity.mentionable().escape('image_url') %>" alt="" /></a>
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+
+<% } else { %>
+  <section class="welcome group">
+  <h1>GoodSees</h1>
+  <p>
+    Your films. Your ratings.
+  </p>
+  <a href="#">Get Started</a>
+  <section>
+<% } %>

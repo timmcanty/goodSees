@@ -12,7 +12,8 @@ GoodSees.Views.Modal = Backbone.CompositeView.extend({
     "submit form.sign-in" : "submitSignIn",
     'click a.sign-up' : 'signUp',
     "click a.sign-in" : 'render',
-    'submit form.sign-up' : 'submitSignUp'
+    'submit form.sign-up' : 'submitSignUp',
+    'click *' : 'clickedOutside'
   },
 
   signInTemplate: JST['layouts/sign_in'],
@@ -35,5 +36,11 @@ GoodSees.Views.Modal = Backbone.CompositeView.extend({
     this.active = false
     this.$el.switchClass('active-modal','inactive-modal');
   },
+
+  clickedOutside: function () {
+    if ($(event.target).parent()[0] == this.$el[0]) {
+      this.hide();
+    }
+  }
 
 });

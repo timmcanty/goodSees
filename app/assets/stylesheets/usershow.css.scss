@@ -1,8 +1,15 @@
 section.main-section {
+  display: block;
   margin: auto;
   width: 900px;
   border-left: 1px solid black;
   border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+section.sidebar {
+  padding-bottom: 20px;
+  padding-left: 5px;
 }
 
 section.sidebar button {
@@ -17,4 +24,11 @@ section.sidebar button {
 
 .displayed-reel {
   font-weight: bold;
+}
+
+section.reel-films {
+}
+
+section.main-section ul.films-list > li {
+  padding: 5px;
 }

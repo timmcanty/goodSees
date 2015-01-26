@@ -19,7 +19,6 @@ GoodSees.Views.FeedIndex = Backbone.View.extend({
   },
 
   signIn: function (event) {
-    console.log('click')
     event.preventDefault();
     GoodSees.vent.trigger('signIn');
   }
